@@ -2,7 +2,7 @@
 layout: post
 title: murano 概览
 category: 技术
-tags: 随感
+tags: openstack
 keywords: 
 description: 
 ---
