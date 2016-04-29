@@ -56,6 +56,7 @@ devstack中部署murano，在local.conf中追加如下两行即可
 
 #### (1)Murano>Manage>Package Definitions ####
 ![](http://i.imgur.com/xlpQ0bP.png)
+
 #### (2)选择方式 ####
 
 1. **文件:**可以安装murano的要求自己规划安装包
