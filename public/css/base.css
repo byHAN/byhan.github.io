@@ -113,13 +113,17 @@ blockquote p {
 }
 /* 其他配置 */
 .center {
+  text-align: center;
+}
+
+.left {
   text-align: left;
 }
 .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
   color: #fff;
   background-color: #303030;
 }
-/* 显示评论按钮 */:
+/* 显示评论按钮 */
 .show-commend {
   width: 100%;
   margin-bottom: 40px;

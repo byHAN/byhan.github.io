@@ -18,6 +18,7 @@ murano是openstack的一个PAAS层项目,旨在简化应用部署。
 从此，将云使用者从创建虚拟机到安装应用的轮回中释放出来
 极大的简化云使用者的，提高了服务体验。
 比如说有客户需要一个安装了apache的虚拟机，现在需要做的就是点一下按钮:
+
 ![](http://i.imgur.com/7Zd7t6B.png)
 
 ## 名词解释 ##
@@ -69,6 +70,7 @@ murano也支持heat模板进行转化，具体如何转换[看这里](http://mur
 
 ### 部署应用 ###
 #### (1)Murano > Application Catalog > Applications ####
+
 找到需要部署的应用，点击Quick Deploy
 
 ![](http://i.imgur.com/IQjMCo6.png)

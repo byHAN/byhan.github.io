@@ -89,7 +89,7 @@ function contentEffects(){
     }); 
     $("pre").addClass("prettyprint");
     prettyPrint(); 
-    $('#content img').addClass('img-thumbnail').parent('p').addClass('center');
+    $('#content img').addClass('img-thumbnail').parent('p').addClass('left');
     $('#content_btn').show();
   }else{
     $('#content_btn').hide();
