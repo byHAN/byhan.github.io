@@ -1,0 +1,14 @@
+# SR-IOV #
+## I/O 虚拟化的未来 ##
+
+I/O 虚拟化的未来实际上已经在今天实现。例如，PCIe 包含虚拟化支持。一种适合服务器虚拟化的虚拟化概念被称为 Single-Root I/O Virtualization (SR-IOV)，这种虚拟化技术（通过 PCI-Special Interest Group 或 PCI-SIG 创建）在单根复杂实例（在本例中为一个带有多个 VM 的服务器，这些 VM 共享一个设备）中提供设备虚拟化。另一个变体（称为 Multi-Root IOV）支持大型拓扑（比如刀片服务器，其中多个服务器能够访问一个或多个 PCIe 设备）。从某种意义上说，这种技术支持任意规模的大型设备网络，该网络可以包含服务器、终端设备和交换机（用于设备发现和包路由）。
+
+通 过 SR-IOV，一个 PCIe 设备不仅可以导出多个 PCI 物理功能，还可以导出共享该 I/O 设备上的资源的一组虚拟功能。这个简化的服务器虚拟化架构如图 4 所示。在这个模型中，不需要任何透传，因为虚拟化在终端设备上发生，从而允许管理程序简单地将虚拟功能映射到 VM 上以实现本机设备性能和隔离安全。
+
+![](http://i.imgur.com/MTbM3Qo.gif)
+图 4. 通过 SR-IOV 实现透传
+
+
+
+----------
+https://wiki.openstack.org/wiki/SR-IOV-Passthrough-For-Networking
