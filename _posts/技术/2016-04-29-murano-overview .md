@@ -18,7 +18,6 @@ murano是openstack的一个PAAS层项目,旨在简化应用部署。
 从此，将云使用者从创建虚拟机到安装应用的轮回中释放出来
 极大的简化云使用者的，提高了服务体验。
 比如说有客户需要一个安装了apache的虚拟机，现在需要做的就是点一下按钮:
-
 ![](http://i.imgur.com/7Zd7t6B.png)
 
 ## 名词解释 ##
@@ -56,34 +55,27 @@ devstack中部署murano，在local.conf中追加如下两行即可
 ### 上传应用 ###
 
 #### (1)Murano>Manage>Package Definitions ####
-
 ![](http://i.imgur.com/xlpQ0bP.png)
-
-
 #### (2)选择方式 ####
 
 1. **文件:**可以安装murano的要求自己规划安装包
 用Murano Programming Language (MuranoPL,也就是yaml和yaql)具体[看这里](http://murano.readthedocs.io/en/stable-liberty/draft/appdev-guide/step_by_step.html)和[这里](http://murano.readthedocs.io/en/stable-liberty/draft/appdev-guide/murano_pl.html)。
 murano也支持heat模板进行转化，具体如何转换[看这里](http://murano.readthedocs.io/en/stable-liberty/draft/appdev-guide/hot_packages.html)
 2. **Repository:**可以自己搭建仓库
-3. **URL:**可以使用官方安装包（地址是[http://apps.openstack.org/](http://apps.openstack.org/) 间歇性抽风，需翻墙）
-![](http://i.imgur.com/tnzBdAO.png)
+3. **URL:**可以使用官方安装包（地址是[http://apps.openstack.org/](http://apps.openstack.org/) 间歇性抽风，需翻墙）![](http://i.imgur.com/tnzBdAO.png)
 4. 点击下一步
 
 
 ### 部署应用 ###
-
 #### (1)Murano > Application Catalog > Applications ####
 找到需要部署的应用，点击Quick Deploy
 
 ![](http://i.imgur.com/IQjMCo6.png)
 
 #### (2)配置应用，起个名儿吧 ####
-
 ![](http://i.imgur.com/VdqObRV.png)
 
 #### (3)勾选镜像 ####
-
 
 1. 镜像：上传应用的时候，如果使用的是官方源的话，会走动上传个镜像到glance
 2. key pair ：注意这里一定要设置keypair，应用部署出来想登陆虚拟机的话，只能通过这里了。
