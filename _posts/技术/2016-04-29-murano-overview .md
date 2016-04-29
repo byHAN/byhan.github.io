@@ -69,6 +69,7 @@ murano也支持heat模板进行转化，具体如何转换[看这里](http://mur
 
 
 ### 部署应用 ###
+
 #### (1)Murano > Application Catalog > Applications ####
 
 找到需要部署的应用，点击Quick Deploy
