@@ -1143,7 +1143,7 @@ figure {
 }
 
 img {
-    vertical-align: middle
+    vertical-align: text-bottom
 }
 
 .img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img,
