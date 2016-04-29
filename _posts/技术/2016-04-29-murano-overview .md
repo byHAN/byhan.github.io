@@ -55,7 +55,7 @@ devstack中部署murano，在local.conf中追加如下两行即可
 
 ### 上传应用 ###
 
-####(1)Murano>Manage>Package Definitions  ####
+#### (1)Murano>Manage>Package Definitions ####
 
 ![](http://i.imgur.com/xlpQ0bP.png)
 
@@ -71,7 +71,7 @@ murano也支持heat模板进行转化，具体如何转换[看这里](http://mur
 4. 点击下一步
 
 
-###部署应用###
+### 部署应用 ###
 
 #### (1)Murano > Application Catalog > Applications ####
 找到需要部署的应用，点击Quick Deploy
