@@ -4,18 +4,14 @@ markdown: kramdown
 
 # 作者信息
 author: 
-  name: Anya Lin
-  email: lay.1010@hotmail.com
-  link: http://painterlin.com
-  weibo: http://weibo.com/orangeissweet
-  github: http://github.com/lay1010
-  music: http://site.douban.com/linanya
-  linkedin: https://www.linkedin.com/pub/anya-lin/81/91/232
-
+  name: byHAN
+  email: 10821712@qq.com
+  link: http://www.hanbaoying.com
+  github: http://github.com/byHAN
 # 站点信息
-title: 林安亚的博客
+title: 韩宝英的博客
 description: My personal blog
-url: http://painterlin.com
+url: http://www.hanbaoying.com
 rss_url: /pages/atom.xml
 
 # gavatar头像及Favicon
@@ -29,10 +25,10 @@ ga:
 
 # disqus 设置
 disqus:
-  shortname: hanbaoying
+  shortname: byHAN
 
 # 主题设置，自动激活某个标签
-active: 读书
+active: 技术
 
 # 首页除了最新文章外显示分类
 cates: 

@@ -1,3 +1,2 @@
-button属性修改在bootstrap.css里面
-button显示修改在-include/footer.html和base.js里面
-
+这里是我的博客，有任何问题请联系10821712@qq.com
+This is my blog,contact me by 2005hanbaoying@gmail.com with any issues.
