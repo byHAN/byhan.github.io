@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Seeker的回信
+title: murano 概览
 category: 技术
 tags: 随感
 keywords: 
@@ -9,16 +9,17 @@ description:
 
 # openstack/murano 概览 #
 
-## 概述 ##
+##概述##
 murano是openstack的一个PAAS层项目,旨在简化应用部署。
  它使用openstack提供的IAAS层服务（nova、neutron、heat）将创建虚拟机部署应用整合起来。
 
 在管理员准备好镜像及其服务包的基础上，使用者可以一键式部署心仪的应用。
- 从此，将云使用者从创建虚拟机到安装应用的轮回中释放出来
- 极大的简化云使用者的，提高了服务体验。
+从此，将云使用者从创建虚拟机到安装应用的轮回中释放出来
+极大的简化云使用者的，提高了服务体验。
 
 比如说有客户需要一个安装了apache的虚拟机，现在需要做的就是点一下按钮:
 ![](http://i.imgur.com/7Zd7t6B.png)
+
 ## 名词解释 ##
 Categories:就是一系列标签，支持app检索
 
@@ -27,7 +28,9 @@ packages：安装包，用户可以从这里导入安装包
 Application：应用，安装包中可有多个应用，导入packages后，Application会增加对于的应用
 
 Environments：相关联的应用及其网络组成一个Environments，部署的话是部署的Environments，在Environments中应用叫组件（component）
+
 ## 安装部署 ##
+
 ### 测试 ###
 devstack中部署murano，在local.conf中追加如下两行即可
     
@@ -43,14 +46,18 @@ devstack中部署murano，在local.conf中追加如下两行即可
     Q_FLOATING_ALLOCATION_POOL=start=192.168.1.172,end=192.168.1.182
     PUBLIC_NETWORK_GATEWAY=192.168.1.1
 
+
 ### 商用 ###
 请[参考这里](http://murano.readthedocs.org/en/stable-liberty/install/manual.html) （我本身只在devstac中部署过，后续部署了再补充）
 
 ## 使用简介 ##
+
 ### 上传应用 ###
+
 ####(1)Murano>Manage>Package Definitions  ####
 
 ![](http://i.imgur.com/xlpQ0bP.png)
+
 
 #### (2)选择方式 ####
 
@@ -62,20 +69,27 @@ murano也支持heat模板进行转化，具体如何转换[看这里](http://mur
 ![](http://i.imgur.com/tnzBdAO.png)
 4. 点击下一步
 
+
 ###部署应用###
+
 #### (1)Murano > Application Catalog > Applications ####
 找到需要部署的应用，点击Quick Deploy
 
 ![](http://i.imgur.com/IQjMCo6.png)
+
 #### (2)配置应用，起个名儿吧 ####
+
 ![](http://i.imgur.com/VdqObRV.png)
+
 #### (3)勾选镜像 ####
 
 
 1. 镜像：上传应用的时候，如果使用的是官方源的话，会走动上传个镜像到glance
 2. key pair ：注意这里一定要设置keypair，应用部署出来想登陆虚拟机的话，只能通过这里了。
 ![](http://i.imgur.com/gGblFY8.png)
+
 #### (4)部署应用 ####
+
 点击部署，这里就开始部署了，运气好的话会部署成功
  运气不好的话，等3600秒就会报失败了
 ![](http://i.imgur.com/NvS8Fur.png)
@@ -103,10 +117,14 @@ murano也支持heat模板进行转化，具体如何转换[看这里](http://mur
 （2）需要提前将必备的包下载好，自己做仓库，否则会导致安装时候下不了包，部署失败
 
 （3）或者把应用提前在虚拟机中装好，然后导入到murano,具体看这里
+
 #### 删除应用 ####
+
 kilo有个bug：
  删除应用不会释放掉资源，需要删除掉environment采才可以
+
 # 架构 #
+
 ![](http://i.imgur.com/LzGVn50.png)
 
 捡重要的说三点：
