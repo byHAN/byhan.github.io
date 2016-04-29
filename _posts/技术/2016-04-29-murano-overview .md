@@ -10,14 +10,15 @@ description:
 # openstack/murano 概览 #
 
 ##概述##
+
 murano是openstack的一个PAAS层项目,旨在简化应用部署。
  它使用openstack提供的IAAS层服务（nova、neutron、heat）将创建虚拟机部署应用整合起来。
 
 在管理员准备好镜像及其服务包的基础上，使用者可以一键式部署心仪的应用。
 从此，将云使用者从创建虚拟机到安装应用的轮回中释放出来
 极大的简化云使用者的，提高了服务体验。
-
 比如说有客户需要一个安装了apache的虚拟机，现在需要做的就是点一下按钮:
+
 ![](http://i.imgur.com/7Zd7t6B.png)
 
 ## 名词解释 ##
