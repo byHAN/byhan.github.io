@@ -2,7 +2,7 @@
 layout: post
 title: 创建虚拟机之image
 category: 技术
-tags: openstack创建虚拟机
+tags: openstack创建虚拟机流程
 keywords: 
 description: 
 ---

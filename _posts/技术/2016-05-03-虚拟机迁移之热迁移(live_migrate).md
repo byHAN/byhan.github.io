@@ -170,7 +170,7 @@ _live_migrate方法的主要功能是构造出migration对象，migration对象�
 
 ![](http://i.imgur.com/aYHWl26.png)
 
-有附加盘，情况下不允许进行块迁移　
+有附加盘，情况下不允许进行块迁移
 todo１．block_device_mapping转换（需要深入理解）
 todo 2 .在理解块迁移实质的基础上，理解这里做此规定的原因
 
