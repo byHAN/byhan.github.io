@@ -1,9 +1,9 @@
 ---
 layout: post
-title: ERROR 1045(28000) : Access denied for user 'root@localhost' (using password: no )
+title: ERROR 1045(28000) :数据库连不上
 category: 技术
 tags: openstack
-keywords: 
+keywords: Access denied for user 'root@localhost' (using password: no )
 description: 
 ---
 
