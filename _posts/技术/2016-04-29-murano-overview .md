@@ -77,18 +77,21 @@ murano也支持heat模板进行转化，具体如何转换[看这里](http://mur
 ![](http://i.imgur.com/IQjMCo6.png)
 
 #### (2)配置应用，起个名儿吧 ####
+
 ![](http://i.imgur.com/VdqObRV.png)
 
 #### (3)勾选镜像 ####
 
 1. 镜像：上传应用的时候，如果使用的是官方源的话，会走动上传个镜像到glance
 2. key pair ：注意这里一定要设置keypair，应用部署出来想登陆虚拟机的话，只能通过这里了。
+3. 
 ![](http://i.imgur.com/gGblFY8.png)
 
 #### (4)部署应用 ####
 
 点击部署，这里就开始部署了，运气好的话会部署成功
  运气不好的话，等3600秒就会报失败了
+
 ![](http://i.imgur.com/NvS8Fur.png)
 
 
@@ -130,4 +133,52 @@ kilo有个bug：
 2. murano-engine：干活的主体，一个自动机，通过反射等技术将用户规划的安装步骤转换为plan，指导murano-agent工作。
 3. murano-agent：镜像中安装，最终运行在客户机中，接受murano-agent的指令，在客户机中按照规划执行安装工作。
 4. RabbitMQ：给murano-ageent发送的消息，是通过消息队列传递的
+
+# 原理 #
+
+创建一个environment然后开始deploy，后台到底执行了什么？
+这里进行简要的剖析，本小节以ApacheHttpServer（io.murano.apps.apache.ApacheHttpServer）为例
+
+#### （1）命令下发 ####
+
+api收到部署请求后，调用murano-engine实施部署。  
+json格式的请求体中携带创建environment所必须的对象类型（classes），另外包含用户勾选的相关配置。
+如包含：
+1. io.murano.Environment对象
+2. 网络对象，用来指向待创建或者已有的网络
+3. 应用对象，包含引用所需的一切内容，比如应用中可能包含虚拟机，则这里会包含虚拟机的name,flavor,keypair等属性。
+
+对象类型的定义是在文件manifest.yaml中，如下面的例子中class为io.murano.apps.apache.ApacheHttpServer，它指向ApacheHttpServer.yaml
+
+![](http://i.imgur.com/mfPj72n.png)
+
+其中ApacheHttpServer.yaml定义了一系列
+
+#### （2）加载定义（Load definitions） ####
+
+校验配置文件中的class合法性，尝试初始化这些个对象，此过程会下载所必须的包。
+初始化的顺序一般为：
+1. Network
+2. Instance
+3. Object
+4. Environment
+
+#### （3）部署资源 ####
+
+执行Environment.deploy，这里首先初始化消息队列，为后续与murano-agent通信做准备。
+然后并发调用每个应用的deloy()方法。  
+本例中，
+这一阶段开始与heat交互，进行资源的预创，生成一个带安全组的Heat模板。
+然后开始部署虚拟机，包括网络相关的设置等。
+部署的虚拟机中，会注入userdata脚本，促使虚拟机起来后执行配置murano-agent。
+
+#### （4）软件配置 ####
+
+待部署的应用中，如果包含murano-agent组件。
+murano-engine会加载DeployApache.templatey，然后通过消息队列传送至murano-agent。
+murano-agent接受到消息后，会执行脚本中的EntryPoint方法。
+
+#### (5)完工 ####
+
+处理完成以上步骤后将结果返回调用者
 
