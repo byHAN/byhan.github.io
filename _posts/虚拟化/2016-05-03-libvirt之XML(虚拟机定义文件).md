@@ -2,7 +2,7 @@
 layout: post
 title: libvirt之XML(虚拟机定义文件)
 category: 技术
-tags: 虚拟化
+tags: 虚拟化层
 keywords: 
 description: 
 ---
