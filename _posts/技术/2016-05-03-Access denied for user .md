@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ERROR 1045(28000) :数据库连不上
+title: ERROR 1045(28000)-数据库连不上
 category: 技术
 tags: openstack
 keywords: Access denied for user 'root@localhost' (using password: no )

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:vmware虚拟机无法执行modprobe -a kvm-intel解决办法
+title: vmware虚拟机无法执行modprobe -a kvm-intel解决办法
 category: 技术
 tags: 虚拟化层
 keywords: 

@@ -2,7 +2,7 @@
 layout: post
 title: USB 安装VMWARE ESX
 category: 技术
-tags: vmware
+tags: 虚拟化层
 keywords: 
 description: 
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ERROR 1045(28000) : openstack计费cloudKitty
+title: openstack计费cloudKitty
 category: 技术
 tags: openstack
 keywords: 
