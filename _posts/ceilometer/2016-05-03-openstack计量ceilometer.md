@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ERROR 1045(28000) : openstack 计量 ceilometer
+title: ERROR 1045(28000) : openstack计量ceilometer
 category: 技术
 tags: openstack
 keywords: 
