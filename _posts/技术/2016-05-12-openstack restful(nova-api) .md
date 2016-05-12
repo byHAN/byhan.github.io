@@ -179,7 +179,7 @@ nova.api.auth:pipeline_factory方法根据在nova.conf中配置的认证策略�
 
 调用nova.api.openstack.compute:APIRouter.factory方法  
 实际上是调用的父类nova.api.openstack.APIRouter的factory方法     
-也就是其__init__方法
+也就是其__init__方法  
 ![](http://i.imgur.com/IfOq2Kv.png)  
 
 - ExtensionManager初始化  
@@ -187,7 +187,7 @@ nova.api.auth:pipeline_factory方法根据在nova.conf中配置的认证策略�
   每个py文件内有个同名类，这里将同名类，放置到ExtensionManager队列中  
   实现Extension的加载  
 
-  ![](http://i.imgur.com/ELMVCzX.png)
+  ![](http://i.imgur.com/ELMVCzX.png)  
   调用nova.api.openstack.compute.legacy_v2.ExtensionManagerd的init方法  
   ![](http://i.imgur.com/4HdW90k.png)  
   其中，CONF.osapi_compute_extension为默认:  
@@ -199,7 +199,7 @@ nova.api.auth:pipeline_factory方法根据在nova.conf中配置的认证策略�
   ![](http://i.imgur.com/NMaEjNz.png)  
   load_standard_extensions会把包路径下的文件一个个加载进来  
   ![](http://i.imgur.com/2zgm4xX.png)  
-  这里以Admin_actions为例 
+  这里以Admin_actions为例  
   ![](http://i.imgur.com/TpPdtqx.png)  
   可见同多数的extension一样，都继承自nova.api.openstack.ExtensionDescriptor  
   而ExtensionDescriptor在初始化的时候会将自己注册给ExtensionManager
@@ -220,7 +220,7 @@ nova.api.auth:pipeline_factory方法根据在nova.conf中配置的认证策略�
 - super(APIRouter, self).__init__(mapper)  
   routes.middleware.RoutesMiddleware,将接受到的url，自动调用map.match()方法  
   将url进行路由匹配并将结果存入request请求的环境变量['wsgiorg.routing_args']  
-  最后会调用其第一个参数给出的函数接口，即self.dispatch。
+  最后会调用其第一个参数给出的函数接口，即self.dispatch。  
   ![](http://i.imgur.com/MCbwl3F.png)  
   ![](http://i.imgur.com/9slPNtw.png)
 
@@ -241,7 +241,7 @@ nova.api.auth:pipeline_factory方法根据在nova.conf中配置的认证策略�
 ### v3与v2版本差异 ###
 
 v3版本不再区分core api和extension api  
-所有的都通过extension api方式提供 
+所有的都通过extension api方式提供  
 ![](http://i.imgur.com/04pigtm.png)  
 
 加载的时候，读取配置文件setup.cfg中nova.api.v3.extensions部分
