@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 虚拟机迁移之热迁移(live_migrate)
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

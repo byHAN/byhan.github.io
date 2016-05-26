@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 底层虚拟化版本过低问题导致虚拟机热迁移失败的问题定位（Unkown savevm section type 5 win7）
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

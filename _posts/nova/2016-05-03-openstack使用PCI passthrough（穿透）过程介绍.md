@@ -1,8 +1,8 @@
 ---
 layout: post
 title: openstack使用PCI passthrough（穿透）过程介绍
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

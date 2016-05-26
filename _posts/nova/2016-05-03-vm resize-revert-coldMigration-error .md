@@ -1,8 +1,8 @@
 ---
 layout: post
 title: vm resize/revert/cold migration bug
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

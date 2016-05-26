@@ -1,8 +1,8 @@
 ---
 layout: post
 title: openstakc libvirt 虚拟机热迁移失败 情况分析
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

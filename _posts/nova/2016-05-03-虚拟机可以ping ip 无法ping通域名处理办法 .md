@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 虚拟机可以ping ip 无法ping通域名处理办法
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

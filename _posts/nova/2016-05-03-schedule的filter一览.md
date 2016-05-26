@@ -1,8 +1,8 @@
 ---
 layout: post
 title: schedule的filter一览
-category: 技术
-tags: openstack
+category: nova
+tags: nova-default
 keywords: 
 description: 
 ---

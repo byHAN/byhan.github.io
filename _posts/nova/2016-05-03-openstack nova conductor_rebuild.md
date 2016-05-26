@@ -1,8 +1,8 @@
 ---
 layout: post
 title: openstack-nova-conductor-rebuild
-category: 技术
-tags: openstack
+category: nova
+tags: nova-code
 keywords: 
 description: 
 ---
