@@ -1,18 +1,18 @@
 ---
 layout: post
-title:something　about ceilometer disk sample 
+title: something　about ceilometer disk sample 
 category: 技术
 tags: 技术
 keywords: 
 description: 
 ---
 
-## 1	需求 ##
+## 1需求 ##
 
 为了保证基于OpenStack的云平台稳定运行，且使得云平台中的虚拟机正常运行  
 需要提供防病毒功能。因此，需要各愿意参与项目厂商在实验室进行充分的验证。
 
-## 2	组网示意图 ##
+## 2组网示意图 ##
 
 ![](http://i.imgur.com/yet2jGQ.png)
 
