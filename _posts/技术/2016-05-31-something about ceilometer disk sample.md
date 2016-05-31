@@ -21,7 +21,7 @@ libvirt查询磁盘相关的信息时会有如下不同
 
 涉及domblkinfo的指标查询不到，如disk.capacity等
 
-具体的指标可以到ceilometer的setup.cfg中查看
+具体的指标可以到ceilometer的setup.cfg中查看  
 形如：
 
     disk.read.requests = ceilometer.compute.pollsters.disk:ReadRequestsPollster
