@@ -1,6 +1,6 @@
 ---
 layout: post
-title:something　about ceilometer disk sample 
+title: something　about ceilometer disk sample 
 category: 技术
 tags: ceilometer
 keywords: 
