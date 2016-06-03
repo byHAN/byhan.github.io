@@ -181,6 +181,13 @@ init方法最后会调用一下_transform方法
 磁盘操作，以磁盘挂载为例，是调用的各个不同类型磁盘的attach方法，见上面的类图。
 ![](http://i.imgur.com/FSDJ5ff.png)
 
+#### 给虚拟机挂载磁盘 ####
+
+实际上也是这段代码，注意参数为true  
+![](http://i.imgur.com/xA1TB52.png)  
+但是构造bdm对象的时候，指定source_type和destination_type都是volume  
+
+
 参考文档：
-http://docs.openstack.org/developer/nova/block_device_mapping.html#id3
+http://docs.openstack.org/developer/nova/block_device_mapping.html#id3  
 https://wiki.openstack.org/wiki/BlockDeviceConfig
