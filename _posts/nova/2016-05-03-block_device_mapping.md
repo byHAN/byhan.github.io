@@ -183,9 +183,46 @@ init方法最后会调用一下_transform方法
 
 #### 给虚拟机挂载磁盘 ####
 
-实际上也是这段代码，注意参数为true  
+实际上也是这段代码，注意参数do_driver_attach为true  
+因为创建虚拟机的时候挂在磁盘也会调用这里  
+如果do_driver_attach会在虚拟机启动的时候挂载
 ![](http://i.imgur.com/xA1TB52.png)  
 但是构造bdm对象的时候，指定source_type和destination_type都是volume  
+![](http://i.imgur.com/SZt8UX7.png)  
+
+也就是说bdm.attach的时候，bdm是 DriverVolumeBlockDevice  
+调用的也是DriverVolumeBlockDevice.attach方法  
+
+1. 从cinder中获取磁盘的连接信息  
+  ![](http://i.imgur.com/CXHCrhP.png)
+  通过断电调试发现connection_info如下图（我们使用的ceph）  
+  ![](http://i.imgur.com/41FoIFc.png)
+  注意：这里调用的cinder的接口/v2/​{tenant_id}​/types/​{volume_type}​/action  
+  接口文档中说没有返回，其实是有返回的  
+  ![](http://i.imgur.com/L6UHPbo.png)
+
+2. 调用hypervisor的attach_volume方法  
+   ![](http://i.imgur.com/8XDk8Xb.png)
+
+3. 如果需要的话，在cinder上建立instance和volume的对应关系  
+   cinder数据库中记录  
+   ![](http://i.imgur.com/ql5xGw3.png)
+
+这里深入看下第2步hypervisor的attach_volume方法  
+也就是libvirt的driver.py中的attach_volume方法  
+实际就是获取到虚拟机的domain然后调用attachDeviceFlags方法  
+入参是根据磁盘信息生成的xml，整理后如下  
+
+![](http://i.imgur.com/NeBZcN0.png)
+
+
+
+另外，如果需要的话，会把盘和当前计算节点进行connect  
+我们这里用的ceph，什么也不做  
+也就是connection_info.get('driver_volume_type')为rbd  
+从而rbd=nova.virt.libvirt.volume.LibvirtNetVolumeDriver  
+中connect_volume  
+![](http://i.imgur.com/IR52lcW.png)  
 
 
 参考文档：
