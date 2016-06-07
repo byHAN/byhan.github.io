@@ -1,6 +1,6 @@
 ---
 layout: post
-title: _base
+title: nova fetch image from glance(something about _base)
 category: 技术
 tags: nova-storage
 keywords: 

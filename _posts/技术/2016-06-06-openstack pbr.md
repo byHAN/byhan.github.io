@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ubuntu14下新增openstack服务到service的导引
+title: openstack pbr
 category: TODO
 tags: openstack
 keywords: 
