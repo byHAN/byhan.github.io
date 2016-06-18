@@ -1,7 +1,7 @@
 ---
 layout: post
 title: openstack pbr
-category: TODO
+category: todo
 tags: openstack
 keywords: 
 description: 
