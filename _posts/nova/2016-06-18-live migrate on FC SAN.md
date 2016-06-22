@@ -132,8 +132,8 @@ is_volume_backed是在外层调用的时候设置进来的
 ## 源码分析 ##
 
 有关热迁移的代码分析，之前的博客已经有了，[具体看这里](http://www.hanbaoying.com/2016/05/03/%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%81%E7%A7%BB%E4%B9%8B%E7%83%AD%E8%BF%81%E7%A7%BB%28live_migrate%29.html)  
-注意：上面这篇博文是基于liberty版本，这篇文章会基于Kilo版本  
-虽然代码有重构，但是大同小异  
+注意：上面那篇之前的博文是基于liberty版本分析的，这里这篇文章是基于Kilo版本  
+虽然两个版本代码有重构，但是逻辑大同小异  
 
 现将kilo版本的代码时序图输出如下  
 ![](http://i.imgur.com/kFSOYPV.png)
