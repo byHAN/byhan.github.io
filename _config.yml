@@ -4,12 +4,12 @@ markdown: kramdown
 
 # 作者信息
 author: 
-  name: byHAN
-  email: 10821712@qq.com
-  link: http://www.hanbaoying.com
-  github: http://github.com/byHAN
+  name:  
+  email:  
+  link:  
+  github:  
 # 站点信息
-title: 韩宝英的博客
+title: 随便写写
 description: My personal blog
 url: http://www.hanbaoying.com
 rss_url: /pages/atom.xml

@@ -9,6 +9,9 @@ description:
 
 ## 一句话总结 ##
 
+resize用来修改虚拟机的规格，也就是可以更换flavor  
+（由于存储镜像的原因，目前很多情况下只允许变大不允许变小）
+
 ## 流程概览 ##
 
 ![](http://i.imgur.com/YaeJmkU.png)  
