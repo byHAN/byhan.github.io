@@ -3,7 +3,7 @@ layout: post
 title: nfs install and config
 category: 技术
 tags: 技术
-keywords: XML error: gdb调试libvirt
+keywords: gdb调试libvirt
 description: 
 ---
 
