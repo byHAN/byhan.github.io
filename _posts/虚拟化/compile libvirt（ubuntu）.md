@@ -1,0 +1,196 @@
+---
+layout: post
+title: compile libvirt（ubuntu）
+category: 技术
+tags: 虚拟化层
+keywords: 
+description: 
+---
+
+## 一句话总结 ##
+
+来来回回，前前后后，左左右右折腾了好久  
+真是满屏荒唐言，一把辛酸泪  
+
+老规矩，一句话总结下：
+libvirt的包是操作系统ubuntu提供的  
+确切的说，ubuntu上是由[ubuntu-cloud-archive-Team](https://launchpad.net/~ubuntu-cloud-archive)这个小组打出来的  
+ubuntu是debian系，因此包是根据debian规则打的  
+在libvirt官方源码的基础上，ubuntu-cloud-archive-Team基于debian打包规则，做了一系列patch，然后打出了包  
+
+## 背景介绍 ##
+
+需要修改libvirt的源码实现个功能  
+libvirt是C编写的，修改了源码要重新编译包吧  
+到[官网](http://libvirt.org/sources/libvirt-1.2.12.tar.gz)上下载源码，configure&make&make install（为了纪念，具体流程附到文后）  
+遇到问题，解决问题，好不容易把包装上了  
+
+
+创建个虚拟机试试，结果报错No PCI buses available  
+分析日志，查看源码无果  
+包是我编的，我开debug调试（分析过程见本人博客：No PCI buses available）  
+调试完，发现这个bug是合理的啊  
+按照代码就应该报错  
+
+找个新环境apt-get install nova-compute  
+确认装出来的libvirt完全正常，不会有上面的bug
+一定是哪里配置不对，期间100次查看virsh capabilities  
+
+最终查阅到ubuntu的打包方法以及debian的指导文档  
+才发现上述问题的原因：
+包不是直接用libvirtd的原生包，而是基于原生包打了一系列补丁。
+
+为了后来人少走弯路
+现将相关流程记录如下：
+
+## 打包流程 ##
+
+### 1.下载源码包 ###
+
+去ubuntu的[云小组](https://launchpad.net/~ubuntu-cloud-archive)下载对应的包  
+我[这里](https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+packages)下载kilo版本对于的包
+![](http://i.imgur.com/N8LjKLW.png)
+
+注意：
+虽然可以通过apt-get source命令下载源码包，不知道为什么下载下来是1.2.2  
+而1.2.2的补丁没有解决No PCI buses available（亲身验证过）  
+且官方支持的是1.2.12，因此这里推荐下载1.2.12的包  
+
+### 2.解压包 ###
+
+将上述下载的包，放置到ubuntu系统的对应目录中  
+执行  
+
+    dpkg-source -x libvirt_1.2.12-0ubuntu14.4~cloud1.dsc
+
+可能需要安装dpkg-dev的包  
+
+    apt-get install dpkg-dev
+    
+可以看到解压的过程中，显示打了一系列的补丁（具体情况make patch for libvirt in ubuntu这篇博文）  
+![](http://i.imgur.com/EBkXLCF.png)  
+
+### 3.编包 ###
+
+    cd libvirt-1.2.12  
+    dpkg-buildpackage -us -uc
+
+注意1.：
+这里可能需要安装一系列的依赖包  
+注意2.：dpkg-buildpackage会自动完成所有从源代码包构建二进制包的工作,[具体参看这里](https://www.debian.org/doc/manuals/maint-guide/build.zh-cn.html#completebuild)  
+简单说就是，他会读取./debian目录下的control和rules完成构建  
+
+### 4.结果 ###
+
+    cd ../
+
+到上一层目录，也就是tar包那层目录，可以看到生成的deb包  
+![](http://i.imgur.com/HdLCpW7.png)
+
+
+至此，如何在ubuntu下打libvirt的deb包已经完成。
+
+
+**-----------------------以下内容理应删除但是并没有-------------------------**
+
+### 背景介绍 ###
+
+需要修改libvirt的代码验证个问题  
+下面记录编译安装libvirt的步骤  
+os:ubuntu14.04  
+libvirt version:1.2.12
+
+### 下载libvirt的源代码 ###
+
+这里安装的是1.2.12  
+
+    wget http://libvirt.org/sources/libvirt-1.2.12.tar.gz
+
+### 解压缩 ###
+
+将libvirt的tar包解开  
+
+    tar -zxf libvirt-1.2.12.tar.gz
+    
+### 配置 ###
+
+执行configure  
+这一步一般用来生成 Makefile，为下一步的编译做准备。  
+可以通过在 configure 后加上参数来对安装进行控制  
+比如代码:./configure –prefix=/usr 意思是将该软件安装在 /usr 下面，执行文件就会安装在 /usr/bin （而不是默认的 /usr/local/bin)。  
+有一些软件还可以加上 –with、–enable、–without、–disable 等等参数对编译加以控制，如下面--with-sanlock  
+可以通过允许 ./configure –help 察看详细的说明帮助。
+
+    ./configure --prefix=/usr --localstatedir=/var  --sysconfdir=/etc --with-sanlock --with-secdriver-apparmor=no
+
+开启apparmor会有一系列权限问题，这里设置为关闭  
+执行这步可能会有依赖错误，需要根据错误安装相关的依赖包  
+如下面的error1 error2等  
+
+### 编译 ###
+
+通过make命令执行编译  
+这里启动多线程编译（10个线程）
+
+    make -j 10
+
+### 安装 ###
+
+
+    make install
+
+如果安装后立即使用libvirt这些程序库时，遇到找不到对应库文件的错误提示  
+这时可能需要运行 ldconfig 等工具来更新刚才安装的共享库。
+
+#### error1 ####
+
+configure: error: no acceptable C compiler found in $PATH  
+
+执行  
+
+     apt-get install gcc
+
+#### error2 ####
+
+configure: error: You must install the libsanlock_client library & headers to compile libvirt
+
+执行  
+
+    apt-get install sanlock* 
+
+#### error3 ####
+
+configure: error: You must install the libyajl library & headers to compile libvirt
+
+    apt-get install libyajl*
+    apt-get install libxml2*
+
+#### error4 ####
+
+configure: error: You must install device-mapper-devel/libdevmapper >= 1.0.0 to compile libvirt  
+执行  
+
+    apt-get install device-mapper*
+    
+#### error5 ####
+
+configure: error: You must install the pciaccess module to build with udev
+
+执行  
+
+    apt-get install libpciaccess*
+    
+#### error6 ####
+
+configure: error: libnl-devel >= 1.1 is required for macvtap support  
+
+执行  
+apt-get install libnl-dev
+
+----------------------------------------------
+
+#### 屏蔽告警 ####
+
+
+
+
