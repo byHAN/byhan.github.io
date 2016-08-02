@@ -1,9 +1,9 @@
 ---
 layout: post
-title: XML error: No PCI buses available
+title: No PCI buses available
 category: 技术
 tags: 虚拟化层
-keywords: XML error: No PCI buses available
+keywords: No PCI buses available
 description: 
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: XML error: gdb调试libvirt
+title: gdb debug libvirt
 category: 技术
 tags: 虚拟化层
-keywords: XML error: gdb调试libvirt
+keywords: gdb debug libvirt
 description: 
 ---
 
