@@ -3,7 +3,7 @@ layout: post
 title: No PCI buses available
 category: 技术
 tags: 虚拟化层
-keywords: No PCI buses available
+keywords:
 description: 
 ---
 

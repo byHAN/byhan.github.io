@@ -3,7 +3,7 @@ layout: post
 title: gdb debug libvirt
 category: 技术
 tags: 虚拟化层
-keywords: gdb debug libvirt
+keywords:
 description: 
 ---
 
