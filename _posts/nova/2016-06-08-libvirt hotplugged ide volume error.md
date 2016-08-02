@@ -1,6 +1,6 @@
 ---
 layout: post
-title: hotplugged ide volume error
+title: libvirt hotplugged ide volume error
 category: nova
 tags: nova-storage
 keywords: 
