@@ -2,7 +2,7 @@
 layout: post
 title: nfs lead to Linux halt
 category: 技术
-tags: 
+tags: 技术
 keywords: 
 description: 
 ---

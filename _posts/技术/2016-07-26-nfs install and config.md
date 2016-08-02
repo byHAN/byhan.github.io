@@ -2,7 +2,7 @@
 layout: post
 title: XML error: nfs install and config
 category: 技术
-tags: 虚拟化层
+tags: 技术
 keywords: XML error: gdb调试libvirt
 description: 
 ---
