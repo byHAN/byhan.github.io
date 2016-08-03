@@ -91,6 +91,18 @@ libvirt是C编写的，修改了源码要重新编译包吧
 至此，如何在ubuntu下打libvirt的deb包已经完成。
 
 
+## 参考文档 ##
+
+[https://www.debian.org/doc/manuals/maint-guide/build.zh-cn.html](https://www.debian.org/doc/manuals/maint-guide/build.zh-cn.html)  
+[http://wiki.ubuntu.org.cn/PackagingGuide](http://wiki.ubuntu.org.cn/PackagingGuide)  
+[http://www.voidcn.com/blog/xiaoliang_199/article/p-1235598.html](http://www.voidcn.com/blog/xiaoliang_199/article/p-1235598.html)  
+
+kilo版本包：  
+[https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+sourcepub/6586291/+listing-archive-extra](https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+sourcepub/6586291/+listing-archive-extra)  
+kilo仓库地址：  
+[http://ubuntu-cloud.archive.canonical.com/ubuntu/pool/main/libv/libvirt/](https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+sourcepub/6586291/+listing-archive-extra)  
+
+
 **-----------------------以下内容理应删除但是并没有-------------------------**
 
 ### 背景介绍 ###

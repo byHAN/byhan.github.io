@@ -72,3 +72,8 @@ description:
 ### 8.验证 ###
 
 安装deb,验证修改的功能  
+
+
+## 参考文档 ##
+
+[https://www.debian.org/doc/manuals/maint-guide/update.zh-cn.html](https://www.debian.org/doc/manuals/maint-guide/update.zh-cn.html)
