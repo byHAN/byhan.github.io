@@ -32,7 +32,7 @@ sudo apt-get install nfs-kernel-server
 
     /export/sanlock *(rw,sync,no_root_squash,no_subtree_check)
 
-![](http://i.imgur.com/2PyAUNY.png)
+![](http://i.imgur.com/2PyAUNY.png)  
 这一行的含义  
 /export/sanlock :nfs服务客户端共享的目录  
 *：允许所有的网段访问，也可以使用具体的IP  

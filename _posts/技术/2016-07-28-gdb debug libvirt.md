@@ -36,7 +36,7 @@ libvirt是c语言的，可使用gdb(或者其他类似工具)进行调试
 
 编译安装(具体参见本人相关博文)  
 找到libvirtd的进程  
-（libvirtd是守卫进程，调试的时候需要调试libvirtd,看有篇博文gdb virsh是不对的）
+（libvirtd是守卫进程，调试的时候需要调试libvirtd,看有篇博文gdb virsh是不对的）  
 ![](http://i.imgur.com/PWo6Ain.png)
 
 执行gdb（以上例进程id为25704作为例子）

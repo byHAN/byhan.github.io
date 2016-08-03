@@ -48,7 +48,7 @@ libvirt是C编写的，修改了源码要重新编译包吧
 ### 1.下载源码包 ###
 
 去ubuntu的[云小组](https://launchpad.net/~ubuntu-cloud-archive)下载对应的包  
-我[这里](https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+packages)下载kilo版本对于的包
+我[这里](https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+packages)下载kilo版本对于的包  
 ![](http://i.imgur.com/N8LjKLW.png)
 
 注意：

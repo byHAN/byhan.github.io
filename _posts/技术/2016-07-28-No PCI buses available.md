@@ -78,7 +78,7 @@ gdb下bt一下，查看函数调用栈
 可见，这里machine的类型是ubuntu,因此没有添加  
 
 有些朋友可能会说，machine类型的就是引用的pc-i440fx-utopic  
-如，用virsh capabilities查得
+如，用virsh capabilities查得  
 ![](http://i.imgur.com/8D6YzHP.png)  
 
 虽然后期os.machine最终会用qemuCanonicalizeMachine替换为pc-i440fx-utopic  
@@ -88,7 +88,7 @@ gdb下bt一下，查看函数调用栈
 ### 问题解决 ###
 
 在上述代码中补充"ubuntu"  
-如下，在ubuntu的libvirt-1.2.12的包中已经做了这个patch
+如下，在ubuntu的libvirt-1.2.12的包中已经做了这个patch  
 ![](http://i.imgur.com/5jCc45H.png)  
 
 ![](http://i.imgur.com/GOynXrD.png)

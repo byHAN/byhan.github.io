@@ -26,7 +26,7 @@ description:
 
     quilt add ./src/locking/domain_lock.c
 
-将要修改的文件添加到当前patch中 
+将要修改的文件添加到当前patch中  
 ![](http://i.imgur.com/CpGXgfD.png)
 
 ### 3.修正bug ###
