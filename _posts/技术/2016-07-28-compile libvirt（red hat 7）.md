@@ -6,6 +6,54 @@ tags: 虚拟化层
 keywords: 
 description: 
 ---
+
+源码包路径：
+http://vault.centos.org/centos/7/updates/Source/SPackages/
+
+
+命令格式： rpm2cpio libvirt-1.2.17-13.el7_2.5.src.rpm|cpio -di
+
+举例：
+[root@localhost RPMS]# rpm2cpio gaim-1.3.0-1.fc4.i386.rpm |cpio -div
+抽取出来的文件就在当用操作目录中的 usr 和etc中；
+
+其实这样抽到文件不如指定安装目录来安装软件来的方便；也一样可以抽出文件；
+
+为软件包指定安装目录：要加 -relocate 参数；下面的举例是把gaim-1.3.0-1.fc4.i386.rpm指定安装在 /opt/gaim 目录中；
+
+ 
+
+[root@localhost RPMS]# rpm -ivh --relocate /=/opt/gaim gaim-1.3.0-1.fc4.i386.rpm
+Preparing... ########################################### [100%]
+      1:gaim ########################################### [100%]
+[root@localhost RPMS]# ls /opt/
+gaim
+这样也能一目了然；gaim的所有文件都是安装在 /opt/gaim 中，我们只是把gaim 目录备份一下，然后卸掉gaim；这样其实也算提取文件的一点用法；
+
+
+安装rpmbuild
+yum install rpm-build
+
+编译包
+rpmbuild -bb libvirt.spec
+（需要安装依赖包）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 背景介绍 ##
 
 需要修改libvirt的代码验证个问题  

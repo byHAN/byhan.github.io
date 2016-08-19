@@ -43,7 +43,6 @@ no_subtree_check：不检查父目录的权限。
 
 ### 3.启动服务 ###
 
-    #sudo /etc/init.d/portmap restart <---重启portmap，
     #sudo /etc/init.d/nfs-kernel-server restart <---重启nfs服务
     #showmount -e <---显示共享出的目录
 

@@ -24,6 +24,17 @@ libvirt是c语言的，可使用gdb(或者其他类似工具)进行调试
 
 也可以直接谷歌，有时候这里下载速度较慢  
 
+注意：  
+上面取到的是libvirt的原生代码。  
+
+如果需要取相关操作系统下的代码会有不同，如我的libvir是安装到ubuntu上的，则需要到[这里取](https://launchpad.net/~ubuntu-cloud-archive)  
+我[这里](https://launchpad.net/~ubuntu-cloud-archive/+archive/ubuntu/kilo-staging/+packages)下载kilo版本对应的包  
+![](http://i.imgur.com/N8LjKLW.png)
+并且，如果是ubuntu下的话，编译请参考本人[这篇博客](http://www.hanbaoying.com/2016/07/28/compile-libvirt-ubuntu.html)  
+然后安装gdb样式的deb包就可以调试了  
+
+下面还是依照原声代码做通用介绍  
+
 ## 1.编译 ##
 
 编译libvirtd的时候需要将调试打开  
