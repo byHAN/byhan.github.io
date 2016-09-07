@@ -1,17 +1,31 @@
 ---
 layout: post
-title: gnocchi配置指南
+title: gnocchi配置及与ceilometer对接指南
 category: 技术
 tags: 虚拟化层
 keywords: 
 description: 
 ---
 
+## 背景介绍 ##
+
+![](http://i.imgur.com/NWW2RPp.png)  
+ceilometer中数据是通过collector进程放置到数据库中的。  
+一开始数据库是用的mongodb,由于mongo会有很明显的性能问题。  
+社区逐渐废弃使用mongo,开始推广gnocchi  
+
+原理：
+通过gnocchi的处理，将采集的指标分离。索引部分可以存到mysql中，数据部分存储到文件中。  
+
+还是上图:  
+在使用mongodb的时候，storage abstration layer=mongo driver.  
+在使用gnocchi的时候，storage abstration layer=gnocchi.
 
 ## 预置 ##
 
-
 #### 创建数据库 ####
+
+登陆数据库节点，为gnocchi创建数据库。
 
     mysql -u root -p
     
@@ -52,16 +66,15 @@ description:
 
 ## 安装gnocchi的包 ##
 
-#### gnocchi ####
-pip install -e .
-pip install -e .[mysql,file]
-(官网给出的是这样)
-（也可以使用python setup.py install）
+#### gnocchi从源码安装 ####
+
+源码安装2.0.2版本
+python setup.py install
 
 
-####gnocchi-client####
+####gnocchi-client从源码安装####
 
-安装客户端gnocchiclient
+安装客户端gnocchiclient2.2.0
 python setup.py install
 
 **注意**  
@@ -76,8 +89,32 @@ python setup.py install
       mkdir /var/lib/gnocchi
       mkdir /var/log/gnocchi
       
+
+#### 配置ceph相关 ####
+
+1、在controller节点安装ceph-common包。  
+如果openstack+ceph环境已经搭建完毕的话，该包就已经安装好了。  
+
+2、给gnocchi创建一个专用的ceph pool，用来存放计量数据。（ceph mon node）  
+ceph osd pool create gnocchi 128 128  
+gnocchi pool的pg_num需要根据实际的ceph环境确定。  
+
+3、给gnocchi创建一个ceph用户。  
+ceph auth get-or-create client.gnocchi mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=gnocchi'  
+
+4、保存keyring文件。  
+ceph auth get-or-create client.gnocchi | tee ceph.client.gnocchi.keyring  
+
+5、拷贝gnocchi的keyring文件ceph.client.gnocchi.keyring到所有controller节点的/etc/ceph目录下。  
+
+6、获取gnocchi用户的ceph key，用于gnocchi.conf中的ceph_secret配置项。  
+[root@hx11 ceph_cluster]# ceph auth get-key client.gnocchi  
+AQAvAr1XN4BtDRAAR8O6ubQMZhCov26b8/f7hg==  
+
+
 #### 配置文件 ####
 
+修改对应的配置项
 将对于配置文件放置到/etc/gnocchi目录下
 （api-paste.ini，gnocchi.conf，policy.json ）
 
@@ -91,6 +128,10 @@ gnocchi-upgrade
 ## 启动服务 ##
 
 systemctl start openstack-gnocchi-api.service openstack-gnocchi-metricd.service
+
+### bin文件处理 ###
+
+拷贝gnocchi文件到/usr	/bin目录下，修改权限为
 
 ## 设置gnocchi ##
 
