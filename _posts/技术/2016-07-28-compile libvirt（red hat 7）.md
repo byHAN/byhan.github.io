@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: compile libvirt（red hat 7）

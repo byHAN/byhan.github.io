@@ -1,6 +1,6 @@
 ---
 layout: post
-title: virsh命令（1）secret,snapshot,pool,volume部分
+title: virsh命令（4）secret,snapshot,pool,volume部分
 category: 技术
 tags: 虚拟化层
 keywords: 
