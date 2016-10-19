@@ -9,7 +9,7 @@ description:
 
 #### 背景介绍 ####
 
-本文主要介绍centos中，利用os极有的源码包边缘libvirt  
+本文主要介绍centos中，利用os有的源码包编译libvirt  
 qemu等同理 
 
 #### 准备编译工具 ####
@@ -22,6 +22,9 @@ qemu等同理
 
 从[源码包路径](http://vault.centos.org/centos/7/updates/Source/SPackages/)下载对应的源码包，如图：  
 ![](http://i.imgur.com/Tj0azhQ.png)  
+
+rpm2cpio  *.rpm |cpio -div  
+解压 
 
 #### 准备编译环境 ####
 
