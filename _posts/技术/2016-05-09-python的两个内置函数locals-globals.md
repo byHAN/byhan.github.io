@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python两个内置函数—locals和globals
-category: python
+category: 技术
 tags: python
 keywords: 
 description: 
