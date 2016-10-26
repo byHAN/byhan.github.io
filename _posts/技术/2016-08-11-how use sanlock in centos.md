@@ -27,7 +27,7 @@ description:
 
     vi /etc/sysconfig/selinux
 
-将SELINUX项目修改为disabled
+将SELINUX项目修改为disabled  
 （此方法需要重启才能生效）
 ![](http://i.imgur.com/2NIxTba.png)
 

@@ -39,6 +39,7 @@ description:
             Once the virtual machine started, login and check the /proc/cpuinfo file:
             $sudo grep -c vmx /proc/cpuinfo
             4
+            
 至此执行modprobe -a kvm-intel可以无误了。
 
 
