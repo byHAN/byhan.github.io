@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: ubuntu中kdump和串口配置
