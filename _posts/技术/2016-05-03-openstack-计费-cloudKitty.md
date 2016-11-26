@@ -161,10 +161,11 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
 ### 安装后台服务 ###
 
-本人是在Ubuntu 14平台，采用源码方式进行的安装。
+本人是在Ubuntu 14平台，安装的是M版本，采用源码方式进行的安装。
 
     git clone git://git.openstack.org/openstack/cloudkitty
     cd cloudkitty
+    git checkout -b develop/mitaka origin/stable/mitaka
     python setup.py install
 
 以上步骤执行完成，安装了如下服务：
@@ -180,6 +181,15 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
     mkdir /etc/cloudkitty
     cp etc/cloudkitty/cloudkitty.conf.sample /etc/cloudkitty/cloudkitty.conf
     cp etc/cloudkitty/policy.json /etc/cloudkitty
+    cp etc/cloudkitty/api_paste.ini /etc/cloudkitty
+    
+    
+安装cloudkitty client：
+
+    git clone git://git.openstack.org/openstack/python-cloudkittyclient
+    cd python-cloudkittyclient
+    git checkout -b develop/mitaka origin/stable/mitaka
+    python setup.py install
 
 ### 配置cloudkitty ###
 
@@ -189,22 +199,40 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
 ### 设置数据存储相关 ###
 
+注意：本步骤只执行一次即可
+
 登录数据库节点，创建cloudkitty所需的数据库，运行脚本创建所需的表。
 执行完可以登录数据库节点，user cloudkitty然后show tables;进行初步验证。
 
-![](http://i.imgur.com/7LRJFgL.png)
+    mysql -uroot -p << EOF
+    CREATE DATABASE cloudkitty;
+    GRANT ALL PRIVILEGES ON cloudkitty.* TO 'cloudkitty'@'localhost' IDENTIFIED BY 'CK_DBPASS';
+    EOF
+
+同步数据库脚本
+    mkdir /var/log/cloudkitty/
+    cloudkitty-dbsync upgrade
+    
+初始化数据库
+
+    cloudkitty-storage-init
 
 ### 设置keystone ###
 
-    openstack user create  cloudkitty --password 密码为用户添加角色
-    openstack role add --project service --user cloudkitty admin创建角色（一定要创建，代码中硬编码，必须要有rating角色）
-    openstack role create rating为用户添加rating角色
-    openstack role add --project service --user cloudkitty rating创建cloudkitty服务对应endpoint(ip请酌情替换)
+    openstack user create  cloudkitty --password Abc12345
+    openstack role add --project service --user cloudkitty admin  
+    
+    创建角色（一定要创建，代码中硬编码，必须要有rating角色）
+    openstack role create rating   为用户添加rating角色
+    openstack role add --project service --user cloudkitty rating  
+    openstack role add --project admin --user cloudkitty rating
+    
+    创建cloudkitty服务对应endpoint(ip请酌情替换)
     openstack service create --name CloudKitty rating
-    openstack endpoint create --region-id RegionOne \
-    --publicurl http://192.168.1.170:8888 \
-    --adminurl http://192.168.1.170:8888 \
-    --internalurl http://192.168.1.170:8888  rating
+    openstack endpoint create --region RegionOne rating public  http://192.168.1.30:8899
+    openstack endpoint create --region RegionOne rating admin  http://192.168.1.30:8899
+    openstack endpoint create --region RegionOne rating internal   http://192.168.1.30:8899
+
 
 ### 启动cloudkitty服务 ###
 
@@ -212,24 +240,37 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
     cloudkitty-api --config-file /etc/cloudkitty/cloudkitty.conf
     cloudkitty-processor --config-file /etc/cloudkitty/cloudkitty.conf附（将服务整合成守卫进程）
-
+:q
 ### 整合horizon ###
 
 下载dashboard源码并安装 
 
     git clone git://git.openstack.org/openstack/cloudkitty-dashboard
     cd cloudkitty-dashboard
+    git checkout -b develop/mitaka origin/stable/mitaka
     python setup.py install
 
- 确认horizon的包路径，官方文档给的参考方法如下
-PY_PACKAGES_PATH=`pip --version | cut -d' ' -f4`
-然而并没有什么卵用，本人环境生效的路径不是这，安装完一直没有对应的页签。
-请前往etc/apache2/sites-available 中的horizon.conf 中的这个设置： <Directory /opt/horizon/>确认
-本人环境horizon生效目录为/opt/horizon/
+确认horizon的包路径，官方文档给的参考方法如下ps   
+PY_PACKAGES_PATH=`pip --version | cut -d' ' -f4`  
+然而并没有什么卵用，本人环境生效的路径不是这，安装完一直没有对应的页签。  
+请前往etc/apache2/sites-available 中的horizon.conf 中的这个设置： <Directory /opt/horizon/>确认  
+本人环境horizon生效目录为/opt/horizon/  
 
-将cloudkitty的文件与horizon文件目录做一个软连接，使得portal内嵌到horizon中
+将cloudkitty的文件与horizon文件目录做一个软连接，使得portal内嵌到horizon中  
 
     ln -s $PY_PACKAGES_PATH/cloudkittydashboard/enabled/_[0-9]*.py \ /opt/horizon/openstack_dashboard/enabled/
+    
+    PY_PACKAGES_PATH=`pip --version | cut -d' ' -f4`
+    ln -sf $PY_PACKAGES_PATH/cloudkittydashboard/enabled/_[0-9]*.py /usr/share/openstack-dashboard/openstack_dashboard/enabled
+    
+
+将cloudkitty的插件链接过去后horizon可能报错如下：  
+You may need to run "python manage.py compress".  
+
+解决方法如下：  
+
+    python /usr/share/openstack-dashboard/manage.py compress
+
 
 # 源码分析 #
 
