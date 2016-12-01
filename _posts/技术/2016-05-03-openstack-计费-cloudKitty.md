@@ -161,7 +161,7 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
 ### 安装后台服务 ###
 
-本人是在Ubuntu 14平台，安装的是M版本，采用源码方式进行的安装。
+本人是在安装的是M版本，采用源码方式进行的安装。
 
     git clone git://git.openstack.org/openstack/cloudkitty
     cd cloudkitty
@@ -211,7 +211,7 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
 同步数据库脚本
     mkdir /var/log/cloudkitty/
-    cloudkitty-dbsync upgrade
+    cloudkitty-dbsync upgrade               执行到这一步了，需要修改配置文件  byhanl
     
 初始化数据库
 
@@ -227,6 +227,9 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
     openstack role add --project service --user cloudkitty rating  
     openstack role add --project admin --user cloudkitty rating
     
+    
+    openstack role add --project service --user admin rating
+    openstack role add --project admin --user admin rating
     创建cloudkitty服务对应endpoint(ip请酌情替换)
     openstack service create --name CloudKitty rating
     openstack endpoint create --region RegionOne rating public  http://192.168.1.30:8899
@@ -240,7 +243,7 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
     cloudkitty-api --config-file /etc/cloudkitty/cloudkitty.conf
     cloudkitty-processor --config-file /etc/cloudkitty/cloudkitty.conf附（将服务整合成守卫进程）
-:q
+
 ### 整合horizon ###
 
 下载dashboard源码并安装 
@@ -257,12 +260,10 @@ PY_PACKAGES_PATH=`pip --version | cut -d' ' -f4`
 本人环境horizon生效目录为/opt/horizon/  
 
 将cloudkitty的文件与horizon文件目录做一个软连接，使得portal内嵌到horizon中  
-
-    ln -s $PY_PACKAGES_PATH/cloudkittydashboard/enabled/_[0-9]*.py \ /opt/horizon/openstack_dashboard/enabled/
     
     PY_PACKAGES_PATH=`pip --version | cut -d' ' -f4`
     ln -sf $PY_PACKAGES_PATH/cloudkittydashboard/enabled/_[0-9]*.py /usr/share/openstack-dashboard/openstack_dashboard/enabled
-    
+    	
 
 将cloudkitty的插件链接过去后horizon可能报错如下：  
 You may need to run "python manage.py compress".  
@@ -270,6 +271,10 @@ You may need to run "python manage.py compress".
 解决方法如下：  
 
     python /usr/share/openstack-dashboard/manage.py compress
+
+
+解决原生bug
+
 
 
 # 源码分析 #

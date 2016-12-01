@@ -228,7 +228,7 @@ todo 2 .在理解块迁移实质的基础上，理解这里做此规定的原因
     
 4. 目标主机上执行后续操作  
    ![](http://i.imgur.com/nhnHkWf.png)  
-   ![](http://i.imgur.com/WSSZAT5.png)
+   ![](http://i.imgur.com/WSSZAT5.png)  
 5.进行一系列的清理操作及其节点信息的更新
 如果状态失败，则调用传入进来的_rollback_live_migration方法进行回滚
 1.目标节点卷断连
