@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 解压initrd和vmlinuz
+title: ceilometer对接postgresql
 category: 技术
 tags: 
 keywords: 
