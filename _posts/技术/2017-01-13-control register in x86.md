@@ -68,3 +68,10 @@ AMD引入的MSR用来启用 SYSCALL/SYSRET指令，后来也被用来进入和�
 用来给外部中断排序，也被称为TPR（task-priority register）  
 系统软件可以通过CR8暂时阻塞低优先级的中断，例如在CR8中写入9，则会阻塞优先级为9及其以下的中断，却可以使得10以上的中断不受影响。  
 设置为0运行所有外部中断，设置为15会禁止所有外部中断。
+
+
+
+### [附MSR](http://www.intel.com/Assets/en_US/PDF/manual/253668.pdf) ###
+
+![](http://i.imgur.com/5RgjzJ7.png)
+
