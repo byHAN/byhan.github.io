@@ -7,7 +7,7 @@ keywords:
 description: 
 ---
 
-注：
+注：本文基于网络上流传的一篇文档《LibvirtQemuKVM.ppt》改编
 
 ![](http://i.imgur.com/xAoTYu7.png)  
 
