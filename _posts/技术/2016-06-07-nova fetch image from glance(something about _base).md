@@ -73,5 +73,5 @@ backend是imagebackend.py中的Rbd
 格式为vms/XXXXXX_disk  
 ![](http://i.imgur.com/choVHXz.png)  
 
-其实也是调研的ceph方法  
+其实也是调用的ceph方法  
 ![](http://i.imgur.com/XRI1I31.png)  
