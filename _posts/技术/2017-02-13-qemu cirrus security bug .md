@@ -18,16 +18,16 @@ description:
 
 可以通过如下两种方式任何一个确认：  
 1.带外从libvirt层面 virsh dumpxml  
-如果类型为cirrus会存在此问题
+如果类型为cirrus会存在此问题  
 ![](http://i.imgur.com/i3zF0zF.png)
 
-2.带内从虚拟机内部 lspci
-如果vga型号为cirrus会存在问题
+2.带内从虚拟机内部 lspci  
+如果vga型号为cirrus会存在问题  
 ![](http://i.imgur.com/dsSphx4.png)
 
 ### 问题根因 ###
 
-可以详细见[漏洞描述](http://mp.weixin.qq.com/s/dzyc5OHdCeu532L4ARw9FA)
+可以详细见[漏洞描述](http://mp.weixin.qq.com/s/dzyc5OHdCeu532L4ARw9FA)  
 ![](http://i.imgur.com/yqnc0rU.png)
 
 其实就是边界没有处理好
@@ -47,7 +47,7 @@ description:
 我们知道，在nova中组装虚拟机的xml(就是给libvirt提供的虚拟机配置)是在_get_guest_config方法中实现的  
 找到显示对应的部分,如下图  
 默认情况下CONF.vnc_enabled是True,并且virt_type是kvm  
-也就是说会走进上面的那个分支，进而add_video_driver会被设置为True
+也就是说会走进上面的那个分支，进而add_video_driver会被设置为True  
 ![](http://i.imgur.com/U03DgMS.png)
 
 
@@ -76,7 +76,7 @@ description:
 ![](http://i.imgur.com/jLuSf43.png)  
 
 接下来根据传入的vga参数调用select_vgahw设置vga相关硬件  
-（当然，如果没有传入，qemu有自己的规则去生成默认的vga设备，不详述）
+（当然，如果没有传入，qemu有自己的规则去生成默认的vga设备，不详述）  
 ![](http://i.imgur.com/TjtnXaN.png)
 
 我们以cirrus为例，继续跟踪，其他类似  
