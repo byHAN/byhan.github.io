@@ -63,7 +63,7 @@ description:
 综上所述，默认情况下，nova传给libvirt的显卡是cirrus  
 
 因此，在nova层面修改，有如下两种方式：
-1.修改nova代码，LibvirtConfigGuestVideo默认类型换为其他方式，如qxl
+1.修改nova代码，LibvirtConfigGuestVideo默认类型换为其他方式，如qxl  
 2.运维层面规避，镜像使用hw_video_model这个值
 
 这里使用qxl简单验证  
