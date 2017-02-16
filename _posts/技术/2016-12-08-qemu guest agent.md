@@ -16,7 +16,7 @@ description:
 
 #### 准备qga包 ####
 
-需要在getos中安装qga的包，由于虚拟机没法直接连接外网，计划直接下载好拷贝到虚拟机内。  
+需要在centos中安装qga的包，由于虚拟机没法直接连接外网，计划直接下载好拷贝到虚拟机内。  
 在一个能连接外网的环境中，可以直接使用yum命令下载包：  
 
     yum install --downloadonly --downloaddir=/home qemu-guest-agent
