@@ -21,7 +21,7 @@ description:
 
 #### 2.kernel ####
 
-内核启动开启iommu,修改/etc/default/grub,增加图中红色部分  
+内核启动开启iommu,修改/etc/default/grub,增加图中红色部分（intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1）  
 ![](http://i.imgur.com/XG4dFNT.png)
 
 使得配置生效，执行如下命令（注意：不执行此命令，上述修改不会生效）  
