@@ -7,7 +7,7 @@ keywords:
 description: 
 ---
 
-查询出安装历时  
+查询出安装历史  
 ![](http://i.imgur.com/49ZJ729.png)  
 
 撤销对应的操作  
