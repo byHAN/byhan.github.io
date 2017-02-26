@@ -1,6 +1,6 @@
 ---
 layout: post
-title: libguestfs
+title: libguestfs详解
 category: 技术
 tags: 虚拟化
 keywords: 
@@ -9,9 +9,8 @@ description:
 
 ## 背景 ##
 
-libguestfs提供里一种编辑镜像的方法  
-当然也可以直接把镜像挂载到本地编辑，可参见[本人这篇博文](http://www.hanbaoying.com/2016/12/08/qemu-guest-agent.html)相关章节  
-不用人为启动虚拟机然后进入虚拟机修改相关内容。  
+libguestfs提供了一种编辑镜像的方法  
+当然也可以直接把镜像挂载到本地进行编辑，可参见[本人这篇博文](http://www.hanbaoying.com/2016/12/08/qemu-guest-agent.html)相关章节  
 
 ## 安装 ##
 
@@ -27,7 +26,7 @@ libguestfs提供里一种编辑镜像的方法
 ![](http://i.imgur.com/YSBLIeV.png)  
 
 
-这时可以看到，启动了一个虚拟机（后面详细分析过程）  
+这时可以看到，启动了一个虚拟机（后面详细过程部分，详细分析启动过程）  
 
 ![](http://i.imgur.com/9Y7xs3M.png)  
 
