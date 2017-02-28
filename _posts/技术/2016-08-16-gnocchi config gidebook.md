@@ -164,8 +164,10 @@ systemctl start openstack-gnocchi-api.service openstack-gnocchi-metricd.service
 使用gnocchi后，原来的ceilometer接口被废弃。
 
 ## 问题解决指引##
-error1:
-![](http://i.imgur.com/vG7MxvF.png)
+
+error1:  
+![](http://i.imgur.com/vG7MxvF.png)  
+
 pip install osc-lib
 
 
