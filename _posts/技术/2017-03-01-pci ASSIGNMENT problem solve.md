@@ -31,6 +31,6 @@ PCI直通的时候，报上述错误
    经过查阅发现，iommu_groups是内核分配的，无法人工干预  
    
 3. centos7.2上编译CONFIG_KVM_DEVICE_ASSIGNMENT（失败）  
-4. 肖神在centos7.0上开启CONFIG_KVM_DEVICE_ASSIGNMENT编译**内核**（成功）  
+4. 肖神在centos7.0上开启CONFIG_KVM_DEVICE_ASSIGNMENT编译内核（成功）  
    然后即可以使用libvirt中如下方式直通虚拟机  
    ![](http://i.imgur.com/ONWS60S.png)
