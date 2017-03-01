@@ -1,6 +1,6 @@
 ---
 layout: post
-title: centos下网卡设备直通（VT-d,pci passthrough）遇到的问题及其解决思路
+title: centos下网卡设备直通（VT-dpci passthrough）遇到的问题及其解决思路
 category: 技术
 tags: 
 keywords: 
