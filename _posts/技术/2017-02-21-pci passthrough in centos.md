@@ -19,6 +19,7 @@ description:
 打开bios中的VT-d设置。
 （默认情况下基本支持和打开）
 
+
 #### 2.kernel ####
 
 内核启动开启iommu,修改/etc/default/grub,增加图中红色部分（intel_iommu=on vfio_iommu_type1.allow_unsafe_interrupts=1）  
@@ -29,6 +30,16 @@ description:
     grub2-mkconfig -o /boot/grub2/grub.cfg  
 
 重启host主机
+
+验证：
+
+    dmesg |grep IOMMU
+
+查看是否有如下内容之一：  
+    DMAR: Intel(R) Virtualization Technology for Directed I/O 
+    PCI-DMA: Intel(R) Virtualization Technology for Directed I/O
+
+注意vfio的作者在[这篇文章](http://vfio.blogspot.jp/2016/09/intel-iommu-enabled-it-doesnt-mean-what.html)说，不能简单的看iommu
 
 #### 3.准备硬件设备 ####
 
