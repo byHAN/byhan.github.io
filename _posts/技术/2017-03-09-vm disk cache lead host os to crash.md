@@ -22,7 +22,7 @@ description:
 将虚拟机内存给调整小，重跑测试，时间一长还是崩了
 
 
-free -m查看  
+free -m查看（这是后续补图，在现场没有截图）  
 ![](http://i.imgur.com/A9k17Py.png)  
 buff/cache部分会急剧增加，导致free和available的内存不停减少  
 继而吃swap分区，吃完swap则host os就重启了  
