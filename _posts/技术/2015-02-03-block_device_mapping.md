@@ -195,7 +195,7 @@ init方法最后会调用一下_transform方法
 调用的也是DriverVolumeBlockDevice.attach方法  
 
 1. 从cinder中获取磁盘的连接信息  
-  ![](http://i.imgur.com/CXHCrhP.png) 
+  ![](http://i.imgur.com/CXHCrhP.png)  
   通过断电调试发现connection_info如下图（我们使用的ceph）  
   ![](http://i.imgur.com/41FoIFc.png)  
   注意：这里调用的cinder的接口/v2/​{tenant_id}​/types/​{volume_type}​/action  
