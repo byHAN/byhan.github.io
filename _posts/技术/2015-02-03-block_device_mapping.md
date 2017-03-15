@@ -57,7 +57,7 @@ It is safe to leave this blank and have the Compute Service infer the size.
 
 A boolean to indicate whether the volume should be deleted when the instance is terminated.  
 True can be specified as True or 1. False can be specified as False or 0.  
-实例挂球之后卷是否删除此设备  
+实例挂卷之后卷是否删除此设备  
 
 
 这里我们用镜像启动一个虚拟机，同时挂载磁盘818f15ec-3c5d-4791-b72e-528f82e97584到虚拟机vdc(type和size留空):  
@@ -75,7 +75,7 @@ True can be specified as True or 1. False can be specified as False or 0.
 
 ![](http://i.imgur.com/7BABTdf.png)
 
-Block Device Mapping
+Block Device Mapping  
 看到这句注释一阵阵想抽过去，到底和上面--block_device_mapping啥关系啊？  
 后面还有一大堆东西。  
 先不管，太乱了，不能忍，东西整理如下：  
@@ -92,7 +92,7 @@ Block Device Mapping
     shutdown=关机对应动作（prserve,remove）
 
 优雅的打开代码，找到nova-client，找到创建虚拟机流程部分（cli在novaclient数据流分析点击这里）  
-代码在novaclient/v2/shell.py的_boot方法 
+代码在novaclient/v2/shell.py的_boot方法  
 可见从block_device_mapping取出值放入block_device_mapping  
 从_parse_block_device_mapping_v2取出值放入block_device_mapping_v2  
 两者不能兼容，也就是指定了--block_device_mapping，就不能指定参数--boot_volume、--snapshot、--block_device  
@@ -125,10 +125,10 @@ block_device_mapping.py文件的开头声明了几个常量字符串，对，就
 ![](http://i.imgur.com/Uy31qlg.png)
 
 代码逻辑如下图，从入参server_dict中根据上述常量值，取出对应的参数bdm，或者legacy_bdm（legacy遗产的意思）  
-然后调用block_device.BlockDeviceDict.from_api将取出的bdm转化为BlockDeviceDict对象
+然后调用block_device.BlockDeviceDict.from_api将取出的bdm转化为BlockDeviceDict对象  
 最后将参数放入create_kwargs['block_device_mapping'],传入底层去创建虚拟了。  
 （这里需要注意block_device_mapping_v2和block_device_mapping互斥  
-因为block_device_mapping_v2是升级版，为了解决老版问题引入的，详细情况容后表）
+因为block_device_mapping_v2是升级版，为了解决老版问题引入的，详细情况容后表）  
 
 ![](http://i.imgur.com/CLKcuy3.png)  
 
@@ -145,6 +145,7 @@ block_device_mapping.py文件的开头声明了几个常量字符串，对，就
 ### 代码流程 ###
 
 #### 对象转换 ####
+
 一般情况会从数据库block_device_mapping表中查出磁盘信息  
 ![](http://i.imgur.com/AUjVNwZ.png)  
 
@@ -166,7 +167,7 @@ block_device_mapping.py文件的开头声明了几个常量字符串，对，就
 ![](http://i.imgur.com/DdgeB0P.png)  
 所有的类初始化，都会调用DriveBlockDevice的init方法  
 init方法最后会调用一下_transform方法  
-![](http://i.imgur.com/3O4h1aR.png)
+![](http://i.imgur.com/3O4h1aR.png)  
 
 总结一下  
 ![](http://i.imgur.com/jHEzwaN.png)  
@@ -178,14 +179,14 @@ init方法最后会调用一下_transform方法
 
 #### 磁盘操作 ####
 
-磁盘操作，以磁盘挂载为例，是调用的各个不同类型磁盘的attach方法，见上面的类图。
+磁盘操作，以磁盘挂载为例，是调用的各个不同类型磁盘的attach方法，见上面的类图。  
 ![](http://i.imgur.com/FSDJ5ff.png)
 
 #### 给虚拟机挂载磁盘 ####
 
 实际上也是这段代码，注意参数do_driver_attach为true  
 因为创建虚拟机的时候挂在磁盘也会调用这里  
-如果do_driver_attach会在虚拟机启动的时候挂载
+如果do_driver_attach会在虚拟机启动的时候挂载  
 ![](http://i.imgur.com/xA1TB52.png)  
 但是构造bdm对象的时候，指定source_type和destination_type都是volume  
 ![](http://i.imgur.com/SZt8UX7.png)  
@@ -194,26 +195,26 @@ init方法最后会调用一下_transform方法
 调用的也是DriverVolumeBlockDevice.attach方法  
 
 1. 从cinder中获取磁盘的连接信息  
-  ![](http://i.imgur.com/CXHCrhP.png)
+  ![](http://i.imgur.com/CXHCrhP.png) 
   通过断电调试发现connection_info如下图（我们使用的ceph）  
-  ![](http://i.imgur.com/41FoIFc.png)
+  ![](http://i.imgur.com/41FoIFc.png)  
   注意：这里调用的cinder的接口/v2/​{tenant_id}​/types/​{volume_type}​/action  
   接口文档中说没有返回，其实是有返回的  
-  ![](http://i.imgur.com/L6UHPbo.png)
+  ![](http://i.imgur.com/L6UHPbo.png)  
 
 2. 调用hypervisor的attach_volume方法  
-   ![](http://i.imgur.com/8XDk8Xb.png)
+   ![](http://i.imgur.com/8XDk8Xb.png)  
 
 3. 如果需要的话，在cinder上建立instance和volume的对应关系  
    cinder数据库中记录  
-   ![](http://i.imgur.com/ql5xGw3.png)
+   ![](http://i.imgur.com/ql5xGw3.png)  
 
 这里深入看下第2步hypervisor的attach_volume方法  
 也就是libvirt的driver.py中的attach_volume方法  
 实际就是获取到虚拟机的domain然后调用attachDeviceFlags方法  
 入参是根据磁盘信息生成的xml，整理后如下  
 
-![](http://i.imgur.com/NeBZcN0.png)
+![](http://i.imgur.com/NeBZcN0.png)  
 
 
 
