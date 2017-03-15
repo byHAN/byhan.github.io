@@ -226,6 +226,6 @@ init方法最后会调用一下_transform方法
 ![](http://i.imgur.com/IR52lcW.png)  
 
 
-参考文档：
+参考文档：  
 http://docs.openstack.org/developer/nova/block_device_mapping.html#id3  
 https://wiki.openstack.org/wiki/BlockDeviceConfig
