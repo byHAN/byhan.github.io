@@ -35,6 +35,7 @@ nfs作为共享存储，用来存放sanlock所需的租约文件。
     /export/sanlock *(rw,sync,no_root_squash,no_subtree_check)
 
 ![](http://i.imgur.com/2PyAUNY.png)  
+
 这一行的含义  
 /export/sanlock :nfs服务客户端共享的目录  
 *：允许所有的网段访问，也可以使用具体的IP  
@@ -84,6 +85,7 @@ no_subtree_check：不检查父目录的权限。
     apt-get install libsanlock-client1
 
 注意,这里可能提示是否修改配置，我们这里选择N不修改配置  
+
 ![](http://i.imgur.com/u0PoiP5.png)
 
 ### 安装libvirt ###
@@ -98,6 +100,7 @@ no_subtree_check：不检查父目录的权限。
     dpkg -i *.deb
 
 注意,这里可能提示是否修改配置，我们这里选择N不修改配置  
+
 ![](http://i.imgur.com/u0PoiP5.png)
 
 使得动态链接库生效,执行如下命令

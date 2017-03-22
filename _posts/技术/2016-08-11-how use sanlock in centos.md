@@ -11,7 +11,7 @@ description:
 
 
 
-**重要**
+**重要**  
 需要关闭selinux  
 否则sanlock会没有权限读取lockspace,会导致Lunix系统重启  
 创建虚拟机报错如下：  
@@ -28,7 +28,7 @@ description:
     vi /etc/sysconfig/selinux
 
 将SELINUX项目修改为disabled  
-（此方法需要重启才能生效）
+（此方法需要重启才能生效）  
 ![](http://i.imgur.com/2NIxTba.png)
 
 或者直接执行命令setenforce 0  
@@ -38,7 +38,7 @@ description:
 ![](http://i.imgur.com/nTlWAaF.png)
 
 
-**重要**
+**重要**  
 
-注意修改libvirt的相关配置，否则会热迁移报错
+注意修改libvirt的相关配置，否则会热迁移报错  
 https://www.mirantis.com/blog/tutorial-openstack-live-migration-with-kvm-hypervisor-and-nfs-shared-storage/
