@@ -90,10 +90,10 @@ description:
     schedinfo                      show/set scheduler parameters(显示或设置scheduler参数)
     screenshot                     take a screenshot of a current domain console and store it into a file(截取当前虚拟机的屏幕，并将其保存到一个文件中)
     set-user-password              set the user password inside the domain
-    setmaxmem                      change maximum memory limit(该变最大内存限制)
-    setmem                         change memory allocation(设置内存大小)
+    setmaxmem                      change maximum memory limit(改变最大内存限制，停机状态下才可以)
+    setmem                         change memory allocation(使用virtio-balloon动态增大或者减小内存大小)
     setvcpus                       change number of virtual CPUs(设置vcpu个数)
-    shutdown                       gracefully shutdown a domain(优雅关闭虚拟机)
+    shutdown                       gracefully shutdown a domain(调用guestos的电源管理模块优雅关闭虚拟机)
     start                          start a (previously defined) inactive domain(启动一个处于关闭状态的虚拟机)
     suspend                        suspend a domain(暂停一个虚拟机)
     ttyconsole                     tty console(tty console显示)

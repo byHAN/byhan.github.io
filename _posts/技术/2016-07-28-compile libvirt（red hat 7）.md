@@ -23,12 +23,11 @@ qemu等同理
 从[源码包路径](http://vault.centos.org/centos/7/updates/Source/SPackages/)下载对应的源码包，如图：  
 ![](http://i.imgur.com/Tj0azhQ.png)  
 
-rpm2cpio  *.rpm |cpio -div  
-解压 
-
 #### 准备编译环境 ####
 
-将源码及其补丁拷贝到/root/rpmbuild/SOURCE/目录下  
+    rpm -ivh *.rpm
+
+执行上述命令会将src包内存，拷贝到/root/rpmbuild目录下
 
 #### 编译 ####
 
