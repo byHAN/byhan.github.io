@@ -1,7 +1,6 @@
 ---
 
 layout: post
-
 title:  virtio的工作流程——qemu中virtio-backend初始化(1)
 date:   2016-03-28 14:10:00
 categories: linux
