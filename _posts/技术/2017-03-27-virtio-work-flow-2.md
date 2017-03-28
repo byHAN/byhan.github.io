@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title:  virtio的工作流程——kernel中virtio-pci初始化(2)
 date:   2016-04-13 14:10:00
