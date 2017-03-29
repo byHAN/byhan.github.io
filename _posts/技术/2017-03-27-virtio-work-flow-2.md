@@ -11,13 +11,12 @@ tags:
 本文转自[肖丁博客](http://ssdxiao.github.io/)
 
 接上节，这次主要讲virtio-pci设备初始化，以及建立相应的通信通道。
-一个virtio-pci设备有2个区域，一个是data区域，一个是config区域
-使用 info mtree 可以看到这个结果。
+一个virtio-pci设备有2个区域  
+一个是data区域，一个是config区域  
+使用 info mtree 可以看到这个结果。  
+data区域是pci-conf-data，config区域是virtio-pci
 
-data区域是pci-conf-data
-config区域是virtio-pci
-
-其中data区域主要记录了pci设备的 设备号，厂商等等信息。
+其中data区域主要记录了pci设备的 设备号，厂商等等信息。  
 而config区域就是用来前后协商，以及irq中断通知。
 
 首先，检测到pci设备，会加载virtio-pci驱动，主要就是初始化相关寄存器，
@@ -28,6 +27,7 @@ config区域是virtio-pci
 
 {%highlight c%}
 virtio-pci的驱动加载是在寄存器初始化好以后，开始进行的。
+
 
   static int virtio_pci_probe(struct pci_dev *pci_dev,
                   const struct pci_device_id *id)
