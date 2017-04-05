@@ -14,7 +14,6 @@ description:
 
 历经重重否定，发现是个大乌龙，记之以自省。  
 
-
 ## ceilometer调用关系 ##
 
 memory.usage在ceilometer中是通过如下插件获取的：  
@@ -59,13 +58,12 @@ memory.usage在ceilometer中是通过如下插件获取的：
 ![](http://i.imgur.com/GTpD2tP.png)
 
 然后找到qemu代码，继续分析  
-virtio_balloon设备初始化的时候设置了guest-stats方法由balloon_stats_get_all方法承载
+virtio_balloon设备初始化的时候设置了guest-stats方法由balloon_stats_get_all方法承载  
 ![](http://i.imgur.com/d6D7c8f.png)
 
-分析balloon_stats_get_all方法，如下，可见从对应数据结构中取出数据
+分析balloon_stats_get_all方法，如下，可见从对应数据结构中取出数据  
 ![](http://i.imgur.com/UOg0pDs.png)
 
-那么问题来了？这里取出的数据是从哪里来的呢？
 答案是virtion_ballon的统计特性写入的，具体分析看[本人这篇博文](http://www.hanbaoying.com/2017/03/20/Virtio-Balloon.html)
 
 分析到这里，我们拿qemu2.2和qemu1.5.3针对这块特性进行分析  
