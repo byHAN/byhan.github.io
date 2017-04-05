@@ -105,6 +105,9 @@ balloon.period的来源是CONF.libvirt.mem_stats_period_seconds
 libvirt给补了一个balloon设备，但是没有开始统计特性  
 ![](http://i.imgur.com/kcuVqkE.png)  
 
+也就是没有如下内容  
+![](http://i.imgur.com/HpLoyfG.png)
+
 ## windows呢？ ##
 
 windows装了balloon的驱动，上面讲的统计特性也开启了，依然采集不到相关信息  
