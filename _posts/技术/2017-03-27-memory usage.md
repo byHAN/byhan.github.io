@@ -3,8 +3,8 @@ layout: post
 title: ceilometer取不到memory.usage指标
 category: 技术
 tags: 虚拟化层
-keywords: 
-description: 
+keywords: ceilometer,memory.usage,windows,virtio,virtio-balloon,guest-stats-polling-interval,guest-stats
+description: ceilometer基于balloon的统计特性获取虚拟机内存使用情况
 ---
 
 ## 背景知识 ##
@@ -108,6 +108,11 @@ libvirt给补了一个balloon设备，但是没有开始统计特性
 也就是没有如下内容  
 ![](http://i.imgur.com/HpLoyfG.png)
 
+## 问题溯源 ##
+
+为什么一开始，同事在正常nova创建的虚拟机，没有办法取到memory.usage呢？  
+经过确认其虚拟机是cirros镜像  
+
 ## windows呢？ ##
 
 windows装了balloon的驱动，上面讲的统计特性也开启了，依然采集不到相关信息  
@@ -116,3 +121,5 @@ windows装了balloon的驱动，上面讲的统计特性也开启了，依然采
 但是为什么取不到呢？  
 经过分析发现除了上面步骤，需要在winodows的guest中启动blnsvr服务  
 这个服务由virtio_balloon提供  
+
+
