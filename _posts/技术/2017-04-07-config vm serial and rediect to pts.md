@@ -2,8 +2,8 @@
 layout: post
 title: 虚拟机串口配置及其导出到主机pts
 category: 技术
-tags: openstack
-keywords: serial,pts,pty,tty,console,虚拟机,console.log
+tags: 虚拟化
+keywords: serial,pts,pty,tty,console,vm,console.log
 description: config serial for vm
 ---
 
