@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 虚拟机串口配置及其导出到主机pts
+title: 虚拟机串口配置及其导出到主机pts和console.log
 category: 技术
 tags: 虚拟化
 keywords: serial,pts,pty,tty,console,vm,console.log
@@ -10,11 +10,11 @@ description: config serial for vm
 ## 背景 ##
 
 本文介绍如何配置虚拟机的串口  
-如何将串口信息导出到主机的pts(伪终端)  
+如何将串口信息导出到主机的pts(伪终端)和console.log  
 关于tty，pts(pty),console看[这篇博文](http://ytliu.info/blog/2013/09/28/ttyde-na-xie-shi-er/)还有[这篇博文](http://blog.chinaunix.net/uid-20543672-id-3225777.html)  
 
 简单一说,看下图  
-![](http://i.imgur.com/mgIkSKk.png)
+![](http://i.imgur.com/mgIkSKk.png)  
 主机有/dev/console  
 可以通过/dev/tty0将/dev/console引到tty1-ttyn(tty1-ttyn就是直接登录的设备，比如alt+f1可以切到tty1)  
 可以将/dev/console引到串口上去，比如ttyS0
@@ -79,6 +79,6 @@ vnc登录到虚拟机内部做如下配置
 ## 配置虚拟机串口到主机文件 ##
 
 虚拟机的xml中将虚拟机的串口0和主机的一个pts设备对应  
-![](http://i.imgur.com/bz1qgkB.png)
+![](http://i.imgur.com/bz1qgkB.png)  
 
 ![](http://i.imgur.com/N38rMgy.png)
