@@ -33,7 +33,7 @@ description:
 
 验证：
 
-    dmesg |grep IOMMU
+     dmesg | grep -e DMAR -e IOMMU
 
 查看是否有如下内容之一：  
     DMAR: Intel(R) Virtualization Technology for Directed I/O 

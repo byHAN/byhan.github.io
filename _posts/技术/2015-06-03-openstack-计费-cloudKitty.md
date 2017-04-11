@@ -3,23 +3,21 @@ layout: post
 title: openstack计费cloudKitty
 category: 技术
 tags: openstack
-keywords: 
-description: 
+keywords: openstack,cloudkitty,billing,计费
+description: openstack billing project cloudkitty
 ---
 
 计费服务一般分为三个层次：
-
     
-- 计量（Metering）
-    获取到资源的指标信息，比如虚拟机的启动时间，停止时间，网卡流量等信息。
-    为上层的计费服务提供数据来源，在openstack中计量由ceilomete来处理。
-    详细见另外一篇博文
+- 计量（Metering）  
+    获取到资源的指标信息，比如虚拟机的启动时间，停止时间，网卡流量等信息。  
+    为上层的计费服务提供数据来源，在openstack中计量由ceilomete来处理。  
     
-- **计费（Rating）详细见本文**
-    根据收费的规则生成对应的话单，比如按照虚拟机的运行时长计费，根据启动时间和停止时间换算出费用。
-    为上层的收费服务提供对应的话单，在openstack中计费有模块CloudKitty来处理。
+- **计费（Rating）详细见本文**  
+    根据收费的规则生成对应的话单，比如按照虚拟机的运行时长计费，根据启动时间和停止时间换算出费用。  
+    为上层的收费服务提供对应的话单，在openstack中计费有模块CloudKitty来处理。  
     
-- 收费（Billing）
+- 收费（Billing）  
     用户账号充值，对应服务的控制等。  
 
 
@@ -28,72 +26,71 @@ description:
 计费模块在整个服务层次中处于承上启下的位置。  
 向下使用计量产生的指标（sample），向上为上层的收费模块提供服务。  
 
-由于ceilometer只专注于计量，而云服务（不管是公有云还是私有云）如何收费是不可或缺的部分。这就从方案的完整性上造成一定割裂，为了弥补openstack的计量和收费之间的鸿沟，提出了cloudkitty服务。  
+由于ceilometer只专注于计量，而云服务（不管是公有云还是私有云）如何收费是不可或缺的部分。  这从方案的完整性上造成一定割裂，为了弥补openstack的计量和收费之间的鸿沟，社区有人提出cloudkitty服务。  
 
 # 使用概览 #
 
-眼见为实，让我们先从Horizon上只管感受下cloudkitty服务。
+眼见为实，让我们先从Horizon上只管感受下cloudkitty服务。  
 cloudkitty整合到horizon目前分为三个部分，分别在Admin侧，Project侧，创建虚拟机页面。
 
 ### Admin侧（系统侧） ###
 
-系统侧主要是指定一系列收费的策略。点开Admin侧，发现将cloudkitty整合到Horizon后，会相应的增加一个Rating组。
-让我们先聚焦到其中的Rating Module，发现有noop|hashmap|pyscripts三个东西，这些东西在cloudkitty中叫processors，也就是处理器，他们的职责是处理从计量模块收集上来的指标。
+系统侧指定一系列收费的策略。  
+cloudkitty整合到Horizon后，点开Admin侧，将会发现相应的增加一个Rating组。  
 
-![](http://i.imgur.com/pEiTDXD.png)
+让我们聚焦到其中的Rating Module，发现有noop|hashmap|pyscripts三个东西  
+这些东西在cloudkitty中叫processors，也就是处理器，他们的职责是处理从计量模块收集上来的指标。  
+
+![](http://i.imgur.com/pEiTDXD.png)  
 
 #### noop ####  
 
 仅是自测模块，忽略
+
 #### hashmap（重点模块） ####
 
-通过类似hashmap的结构，一层层的将各个服务的metadata和cloudkitty进行关联。
+通过类似hashmap的结构，一层层的将openstack各个服务的metadata和cloudkitty进行关联。  
 
-
-
-- 最顶层是service,表示目前可以计费的项目，包括：
-compute  
-image  
-volume  
-network.bw.in  
-network.bw.out  
-network.floating  
-我们这里创建了compute和volume服务
+- **service**  
+最顶层是service,表示目前可以计费的项目，可取的范围包括：  
+**compute**  
+**image**  
+**volume**  
+**network.bw.in**  
+**network.bw.out**  
+**network.floating**  
+下图中关联了compute和volume服务  
 ![](http://i.imgur.com/yJ6KaNt.png)
 
-- Hashmp Service  
-可以在service建立一系列的field，与对应服务中的meatadata进行对应。以compute服务为例,我们在compute这个service下新增两个field：flavor和image_id
+- **Hashmap Service**  
+可以在service建立一系列的field，与对应服务中的meatadata进行对应。  
+以compute服务为例,我们在compute这个service下新增两个field：flavor和image_id
 意味着对flavor和image进行计费  
 ![](http://i.imgur.com/TiUet56.png)
 
-- Hashmp field
-可以为field指定mapping,也就是这个field下的资源如何收费。  
-flavor为例，新建两个field mapping，值分别为m1.tiny和m1.small，意味针对m1.tiny和m1.samll指定收费标准。  
+- **Hashmp field**  
+为field指定mapping,也就是这个field下的资源收费规则。  
+flavor为例，新建两个field mapping，值分别为m1.tiny和m1.small，意味针对m1.tiny和m1.samll这两个模板指定收费标准。  
 ![](http://i.imgur.com/x3wvn5n.png)
-
 
 #### pyscripts ####
 
-以自己指定脚本的形势处理获取到的指标。
+以自己指定脚本的形势处理获取到所需指标。
 
 ### project侧 ###
 
-租户侧主要给出当前租户计费的总值
-
+租户侧给出当前租户计费的总值  
 ![](http://i.imgur.com/CtY1wet.png)
 
-并能分析给出各个计费值的统计信息（本人环境由于信息量过大，这块崩溃了，下图为盗图）
-
+并能分析给出各个计费值的统计信息（本人环境由于信息量过大，这块portal崩溃了，下图为盗图）  
 ![](http://i.imgur.com/NMRErz7.png)
 
 ### 创建虚拟机页签 ###
 
-cloudkitty将相关服务整合到创建虚拟机的流程中，可以在创建时候直观体现费用信息。
-上文中，我们已经把模板：m1.tiny和镜像：cirros_raw进行了收费量化
-当勾选到这两个资源项时，会展现出收费信息，起到一个预览的作用。
-
+cloudkitty将相关服务整合到创建虚拟机的流程中，可以在创建时候直观体现费用信息。  
+上文中，我们已经把模板：m1.tiny和镜像：cirros_raw进行了收费量化  
+当勾选到这两个资源项时，会展现出收费信息，起到一个预览的作用。  
 ![](http://i.imgur.com/PYQhupQ.png)
-
 
 # 优缺点 #
 
@@ -111,8 +108,8 @@ cloudkitty将相关服务整合到创建虚拟机的流程中，可以在创建�
 - 易用性不好，使用不够贴近用户。
 	- 计费策略是在专门的计费页面，建立资源项与计费的关系，而不是直接整合到业务中，增大了管理员的工作量
 	- 好多地方是隐式约定的，无相应说明，给使用者造成误解。
-- 无法做到按照用户计费。
-- 计费的产生周期，无法做到各个资源迥异。
+- 无法做到按照用户计费(当前只能根据租户计费)。
+- 计费的产生周期，无法做到各个资源迥异（目前是统一设置）。
 - 项目热度不足。
 
 # 核心总结 #
@@ -239,7 +236,7 @@ flat:当其他费率小于当前值的时候，使用当前值，否则使用其
 
 ### 启动cloudkitty服务 ###
 
-本人在服务启动的时候，遇到较多问题，多是官方参考配置项不对引入，已跟源码修正，请参考本人配置项 
+本人在服务启动的时候，遇到较多问题，多是官方参考配置项不对引入，已debug源码修正，请参考本人配置项  
 
     cloudkitty-api --config-file /etc/cloudkitty/cloudkitty.conf
     cloudkitty-processor --config-file /etc/cloudkitty/cloudkitty.conf附（将服务整合成守卫进程）

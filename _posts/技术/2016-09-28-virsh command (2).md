@@ -68,7 +68,7 @@ description:
 
 #### Node Device (help keyword 'nodedev'): ####
 
-可以用来将设备分配给虚拟机，[参考这里](https://www.suse.com/documentation/sles11/book_kvm/data/sec_libvirt_config_pci_virsh.html)
+可以用来将设备分配给虚拟机，[参考这里](https://www.suse.com/documentation/sles11/book_kvm/data/sec_libvirt_config_pci_virsh.html)  
 **nodedev-create**:             create a device defined by an XML file on the node(根据主机上的XML定义创建一个设备)  
 **nodedev-destroy**:            destroy (stop) a device on the node(删除主机上的一个设备)  
 **nodedev-detach**:             detach node device from its device driver(通过设备驱动移除主机上的设备)  
