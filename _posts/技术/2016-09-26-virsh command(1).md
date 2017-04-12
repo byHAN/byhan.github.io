@@ -3,7 +3,7 @@ layout: post
 title: virsh命令（1）之domain部分
 category: 技术
 tags: 虚拟化层
-keywords: 
+keywords: virsh,libvirt
 description: 
 ---
 
@@ -53,7 +53,7 @@ description:
     domuuid                        convert a domain name or id to domain UUID(通过虚拟机的name或ID获取虚拟机的UUID)
     domxml-from-native             Convert native config to domain XML(将已存在的一组QEMU参数转成可以被libvirt使用Domain XML文件)
     domxml-to-native               Convert domain XML to native config(将已存在的libvirt使用的Domain XML文件转化为QEMU参数)
-    dump                           dump the core of a domain to a file for analysis(dump出虚拟机的内存文件)
+    dump                           dump the core of a domain to a file for analysis(dump出虚拟机的core文件，用于分析崩溃原因)
     dumpxml                        domain information in XML(获取虚拟机的XML配置信息)
     edit                           edit XML configuration for a domain(编辑虚拟机的XML配置文件)
     event                          Domain Events(获取虚拟机事件)
@@ -93,7 +93,7 @@ description:
     setmaxmem                      change maximum memory limit(改变最大内存限制，停机状态下才可以)
     setmem                         change memory allocation(使用virtio-balloon动态增大或者减小内存大小)
     setvcpus                       change number of virtual CPUs(设置vcpu个数)
-    shutdown                       gracefully shutdown a domain(调用guestos的电源管理模块优雅关闭虚拟机)
+    shutdown                       gracefully shutdown a domain(优雅关闭虚拟机,acpi|agent（启用的qga情况下调用qga进行关机）|initctl(upstart命令)|signal|paravirt（xen）)
     start                          start a (previously defined) inactive domain(启动一个处于关闭状态的虚拟机)
     suspend                        suspend a domain(暂停一个虚拟机)
     ttyconsole                     tty console(tty console显示)

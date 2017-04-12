@@ -1,13 +1,14 @@
 ---
 layout: post
-title: vmware虚拟机无法执行modprobe -a kvm-intel解决办法
+title: 无法执行modprobe -a kvm-intel解决办法
 category: 技术
 tags: 虚拟化层
-keywords: 
+keywords: nested,kvm_intel,kvm,modinfo,modprobe
 description: 
 ---
 
-本人在服务上安装了vmware ESX，然后其中创建了几台虚拟机，安装了openstack的Liberty版本。
+# 一 #
+本人在服务上安装了vmware ESX，然后其中创建了几台虚拟机，安装了openstack的Liberty版本。  
 但是无法使用kvm，按照官方指导设置kvm的时候报错。
 
 ![](http://i.imgur.com/8J76eO2.png)
@@ -43,3 +44,17 @@ description:
 至此执行modprobe -a kvm-intel可以无误了。
 
 
+----------
+
+# 二 #
+
+默认情况下加载kvm_intel模块netst特性也是关闭的
+
+![](http://i.imgur.com/VbOeGxK.png)
+
+通过以下方法删除模块，然后指定参数加载  
+![](http://i.imgur.com/9cBh32N.png)
+
+另外，为了使得修改永久生效可以修改/etc/modprobe.d/kvm.conf  
+
+    options kvm_intel nested=1
