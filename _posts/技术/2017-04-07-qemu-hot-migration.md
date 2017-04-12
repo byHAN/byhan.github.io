@@ -1,18 +1,13 @@
 ---
-
 layout: post
-
-title:  "走读qemu代码热迁移流程"
-
-date:   2015-09-07 11:10:01
-
-categories: 虚拟化
-tags : 
-  - 虚拟化
-  - kvm
+title: qemu迁移代码分析
+category: 技术
+tags: 虚拟化层
+keywords: migrate,qemu
+description: 
 ---
 
-热迁移的概念已经不陌生了，在虚拟化发展中，热迁移也越来越多的应用在商用场景。今天就来分析下热迁移的代码，详细了解下这一过程如何实现的。（[肖丁](http://ssdxiao.github.io/%E8%99%9A%E6%8B%9F%E5%8C%96/2015/09/07/qemu-hot-migration.html)）
+热迁移的概念已经不陌生了，在虚拟化发展中，热迁移也越来越多的应用在商用场景。今天就来分析下热迁移的代码，详细了解下这一过程如何实现的。
 
 首先，从官网上翻译下关于[热迁移的算法]描述。
 
@@ -819,4 +814,5 @@ void vmstate_save_state(QEMUFile *f, const VMStateDescription *vmsd,
 至此，基本代码走读结束。
 
 
-[热迁移的算法]:http://www.linux-kvm.org/page/Migration
+[热迁移的算法]:[http://www.linux-kvm.org/page/Migration](http://www.linux-kvm.org/page/Migration)
+（[转自肖丁](http://ssdxiao.github.io/%E8%99%9A%E6%8B%9F%E5%8C%96/2015/09/07/qemu-hot-migration.html)）
