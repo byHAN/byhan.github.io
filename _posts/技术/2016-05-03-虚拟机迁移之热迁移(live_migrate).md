@@ -2,8 +2,8 @@
 layout: post
 title: 虚拟机迁移之热迁移(live_migrate)
 category: nova
-tags: nova-default
-keywords: 
+tags: openstack
+keywords: nova,live-migrate,qemu,migrate
 description: 
 ---
 
@@ -15,6 +15,8 @@ description:
 迁移分为热迁移和冷迁移。  
 冷迁移在openstack中同resize类似，本文不做分析。  
 热迁移，迁移过程中虚拟机保持不当机，保证了服务的可持续性，提高了云使用者的体验。  
+
+本文主要分析了nova中的热迁移流程，qemu层面的迁移，看本人[这篇博文](http://www.hanbaoying.com/2017/04/07/qemu-hot-migration.html)
 
 # 核心总结 #
 
@@ -201,17 +203,16 @@ todo 2 .在理解块迁移实质的基础上，理解这里做此规定的原因
 接口入参中很重要的一项就是迁移配置项。  
 配置项约束了迁移过程中的动作，作为入参传给上述的libvirt迁移函数，间接决定了迁移过程中的相应动作，相关参数可以如下：  
 
-![](http://i.imgur.com/vBacHCj.png)
-
-![](http://i.imgur.com/ZN2ijhN.png)
-
+![](http://i.imgur.com/Ebnb3tL.png)  
+![](http://i.imgur.com/p8gnvrm.png)  
+![](http://i.imgur.com/f6pzZml.png)  
 那么下面的代码就不难理解了，读取出迁移配置项目  
 配置项之间逻辑或出一个值logical_sum = six.moves.reduce(lambda x, y: x | y, flagvals)  
 分析见后
 没配置VIR_DOMAIN_XML_MIGRATABLE，或者没有VNC和附加盘走接口1，其他情况走接口2  
 
-![](http://i.imgur.com/4XS89ox.png)
-![](http://i.imgur.com/1bQggMi.png)
+![](http://i.imgur.com/4XS89ox.png)  
+![](http://i.imgur.com/1bQggMi.png)  
 
 #### 迁移检测（_live_migration_monitor） ####
 

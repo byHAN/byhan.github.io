@@ -1,16 +1,16 @@
 ---
 layout: post
-title:  "Virtio-Balloon超详细分析"
-date:   2017-3-20 21:13:31
-categories:
-  - linux
-tags:
-  - linux
+title: Virtio-Balloon超详细分析
+category: 技术
+tags: 虚拟化层
+keywords: ceilometer,memory.usage,windows,virtio,virtio-balloon
+description: reading code of virtio balloon
 ---
 
 前言
 ---
-本文转自[肖丁博客](http://ssdxiao.github.io/)
+
+分析celometer获取memory.usage的时候，发现功能实现是基于virtio_balloon，见[本人这篇博文](http://www.hanbaoying.com/2017/03/27/memory-usage.html)
 
 Virtio-Balloon驱动即内存气泡，可以用来动态调整内存，这个驱动很早就已经出来了，
 最近才发现这个驱动居然还有监控内存指标的功能，所以再一次review了一遍代码。这里就把这个驱动详细的介绍一遍。
@@ -451,5 +451,5 @@ Virtio-Balloon进行内存复用本身存在一些问题
 * 内存复用需要实时监控，发现客户虚拟机内存使用过多还要及时归还内存，对于系统本身做这个功能有很大的局限性。
 * Balloon特性的内存复用并不是本质上进行内存的冗余复用，仅仅是借东墙补西墙，当虚拟机都大量使用内存时候，并不能实际突破物理内存上限。
 
-
+本文转自[肖丁博客](http://ssdxiao.github.io/)
 

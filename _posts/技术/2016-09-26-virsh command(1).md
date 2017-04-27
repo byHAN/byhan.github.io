@@ -16,13 +16,14 @@ description:
     attach-device                  attach device from an XML file(通过XML配置给虚拟机添加设备)
     attach-disk                    attach disk device(添加磁盘设备）
     attach-interface               attach network interface（添加网络设备）
-    autostart                      autostart a domain（给虚拟机添加自动启动配置，当libvirtd服务被拉起的时候，自动启动）
+    **autostart**  
+    autostart a domain（给虚拟机添加自动启动配置，当libvirtd服务被拉起的时候，自动启动）
     blkdeviotune                   Set or query a block device I/O tuning parameters.（设置或查询磁盘I/ O参数）
     blkiotune                      Get or set blkio parameters（获取或设置blkio参数）
     blockcommit                    Start a block commit operation.（将磁盘文件的变化保存到备份文件中）
     blockcopy                      Start a block copy operation.（拷贝磁盘备份镜像到目的地）
     blockjob                       Manage active block operations（管理active状态的磁盘任务）
-    blockpull                      Populate a disk from its backing image.（从备份镜像中拷贝数据到磁盘）
+    blockpull                      Populate a disk from its backing image.（从backing file中拷贝数据到磁盘）
     blockresize                    Resize block device of domain.（给虚拟机的块设备扩容）
     change-media                   Change media of CD or floppy drive（更新cdrom或floppy设备）
     console                        connect to the guest console（通过控制连接虚拟机）
@@ -46,10 +47,13 @@ description:
     domif-setlink                  set link state of a virtual interface(虚拟机设备接口链路状态设置)
     domiftune                      get/set parameters of a virtual interface(获取或者设置虚拟机设备接口得参数)
     domjobabort                    abort active domain job(终止虚拟机的一个处于active的任务)
-    domjobinfo                     domain job information(获取虚拟机的任务信息)
+    **domjobinfo**  
+    domain job information(获取虚拟机的任务信息，比如正在virsh save可以查询操作情况)
     domname                        convert a domain id or UUID to domain name(通过虚拟机的ID或者UUID获取虚拟机的名字)
-    dompmsuspend                   suspend a domain gracefully using power management functions(使用电源管理功能将虚拟机优雅挂起)
-    dompmwakeup                    wakeup a domain from pmsuspended state(唤醒使用dompmsuspend挂起的虚拟机)
+    **dompmsuspend**  
+    suspend a domain gracefully using power management functions(使用电源管理功能将虚拟机挂起，需要qga支持)
+    **dompmwakeup**  
+    wakeup a domain from pmsuspended state(唤醒使用dompmsuspend挂起的虚拟机)
     domuuid                        convert a domain name or id to domain UUID(通过虚拟机的name或ID获取虚拟机的UUID)
     domxml-from-native             Convert native config to domain XML(将已存在的一组QEMU参数转成可以被libvirt使用Domain XML文件)
     domxml-to-native               Convert domain XML to native config(将已存在的libvirt使用的Domain XML文件转化为QEMU参数)
@@ -57,16 +61,22 @@ description:
     dumpxml                        domain information in XML(获取虚拟机的XML配置信息)
     edit                           edit XML configuration for a domain(编辑虚拟机的XML配置文件)
     event                          Domain Events(获取虚拟机事件)
-    inject-nmi                     Inject NMI to the guest(注入NMI中断到虚拟机内部)
+    **inject-nmi**  
+    Inject NMI to the guest(注入NMI中断到虚拟机内部，当硬件发生不可恢复的错误时使用)
     iothreadinfo                   view domain IOThreads
     iothreadpin                    control domain IOThread affinity
     iothreadadd                    add an IOThread to the guest domain
     iothreaddel                    delete an IOThread from the guest domain
     send-key                       Send keycodes to the guest(往虚拟机发送键盘按键指令)
-    send-process-signal            Send signals to processes(给进程发送信号)
+    **send-process-signal**  
+    Send signals to processes(给进程发送信号,qemu不支持)
     lxc-enter-namespace            LXC Guest Enter Namespace(进入LXC虚拟机的命名空间)
-    managedsave                    managed save of a domain state(管理保存虚拟机的状态,将虚拟机保存并销毁)
-    managedsave-remove             Remove managed save of a domain（删除虚拟机状态管理设置）
+    
+    **managedsave**  
+    managed save of a domain state(管理保存虚拟机的内存状态到/var/lib/libvirt/qemu/save/*.save,将虚拟机保存并销毁,后续restore的时候恢复到save之前的状态)
+    **managedsave-remove**  
+    Remove managed save of a domain（删除虚拟机状态管理设置/var/lib/libvirt/qemu/save/*.save文件）
+    
     memtune                        Get or set memory parameters（获取或者设置内存参数）
     metadata                       show or set domain's custom XML metadata
     migrate                        migrate domain to another host（将虚拟机迁移到另一个节点）
@@ -79,23 +89,34 @@ description:
     qemu-monitor-command           QEMU Monitor Command（给qemu monitor发送命令）
     qemu-monitor-event             QEMU Monitor Events（监听qemu monitor事件）
     qemu-agent-command             QEMU Guest Agent Command（给qemu agent发送命令）
-    reboot                         reboot a domain（优雅重启虚拟机）
+    **reboot**  
+    reboot a domain（优雅重启虚拟机，acpi|agent（启用的qga情况下调用qga进行关机）|initctl(upstart命令)|signal|paravirt（xen））,对应qemu只支持agent和acpi
     reset                          reset a domain（强制重启虚拟机）
-    restore                        restore a domain from a saved state in a file（通过保存的内存文件恢复虚拟机）
-    resume                         resume a domain（唤醒处于pause状态的虚拟机）
-    save                           save a domain state to a file（将虚拟机状态保存到一个文件）
-    save-image-define              redefine the XML for a domain's saved state file（根据save的虚拟机状态文件重定义XML）
-    save-image-dumpxml             saved state domain information in XML(将虚拟机的状态保存到XML文件中)
-    save-image-edit                edit XML for a domain's saved state file(修改保存虚拟机状态的XML文件)
+    
+    **restore**  
+    restore a domain from a saved state in a file（通过保存的内存文件恢复虚拟机）
+    **resume**  
+    resume a domain（唤醒处于pause状态的虚拟机，也就是suspend的虚机）
+    **save**  
+    save a domain state to a file（将虚拟机内存状态保存到一个文件）
+    **save-image-define**  
+    redefine the XML for a domain's saved state file（刷新虚拟机配置到save虚拟机的文件中）
+    **save-image-dumpxml**  
+    **saved state domain**  
+    information in XML(dump出save虚拟机文件中的虚拟机配置信息)
+    **save-image-edit**  
+    edit XML for a domain's saved state file(出save虚拟机文件中的虚拟机配置信息)
+    
     schedinfo                      show/set scheduler parameters(显示或设置scheduler参数)
     screenshot                     take a screenshot of a current domain console and store it into a file(截取当前虚拟机的屏幕，并将其保存到一个文件中)
     set-user-password              set the user password inside the domain
     setmaxmem                      change maximum memory limit(改变最大内存限制，停机状态下才可以)
     setmem                         change memory allocation(使用virtio-balloon动态增大或者减小内存大小)
     setvcpus                       change number of virtual CPUs(设置vcpu个数)
-    shutdown                       gracefully shutdown a domain(优雅关闭虚拟机,acpi|agent（启用的qga情况下调用qga进行关机）|initctl(upstart命令)|signal|paravirt（xen）)
+    shutdown                       gracefully shutdown a domain(优雅关闭虚拟机,acpi|agent（启用的qga情况下调用qga进行关机）|initctl(upstart命令)|signal|paravirt（xen）)，对应qemu只支持agent和acpi
     start                          start a (previously defined) inactive domain(启动一个处于关闭状态的虚拟机)
-    suspend                        suspend a domain(暂停一个虚拟机)
+    **suspend**  
+    suspend a domain(暂停一个虚拟机)
     ttyconsole                     tty console(tty console显示)
     undefine                       undefine a domain(删除虚拟机的定义)
     update-device                  update device from an XML file(根据XML配置更新虚拟机的设备)
@@ -180,6 +201,7 @@ description:
 **blkiotune**:                      Get or set blkio parameters  
 ![](http://i.imgur.com/aACtYHL.png)  
 **blockcommit**:                    Start a block commit operation.（Commit changes from a snapshot down to its backing image合并快照文件）  
+![](http://i.imgur.com/sYo8u2j.png)  
 **blockcopy**:                      Start a block copy operation.  
 blockjob:                       Manage active block operations  
 **blockpull**: Populate a disk from its backing image. （将backing file数据合并至overlay中） 
@@ -266,6 +288,8 @@ qemu-agent-command             QEMU Guest Agent Command
 
 domjobabort:                        abort active domain job  
 **domjobinfo**:                     domain job information  
+可以用来查询任务进展，比如正在进行virsh save操作的时候，可以使用此命令进行查询  
+![](http://i.imgur.com/KZ5w5Pt.png)  
 
 **dump**:                           dump the core of a domain to a file for analysis  
 **domdisplay**:                     domain display connection URI

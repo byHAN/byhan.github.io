@@ -8,7 +8,7 @@ tags:
   - virtio
 ---
 
-本文转自[肖丁博客](http://ssdxiao.github.io/)
+
 
 接上节，这次主要讲virtio-pci设备初始化，以及建立相应的通信通道。  
 一个virtio-pci设备有2个区域  
@@ -571,3 +571,4 @@ setup_vq用来初始化vring，并且通知后端msix中断。
 
 
 
+本文转自[肖丁博客](http://ssdxiao.github.io/)

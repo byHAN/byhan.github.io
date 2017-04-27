@@ -3,7 +3,7 @@ layout: post
 title: openstack nova evacuate
 category: nova
 tags: nova-code 
-keywords: 
+keywords: evacuate,nova,openstack,vm ha
 description: 
 ---
 

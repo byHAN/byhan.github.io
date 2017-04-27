@@ -27,5 +27,5 @@ kernel.sysrq = 1
 #### 验证kdump####
 
 1. echo c> /proc/sysrq-trigger  
-2. bmc触发kdump
-
+2. 可以配上串口，从bmc查看触发的kdump  
+![](http://i.imgur.com/vHVqiwL.png)

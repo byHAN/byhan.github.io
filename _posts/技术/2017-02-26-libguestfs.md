@@ -3,8 +3,8 @@ layout: post
 title: libguestfs详解
 category: 技术
 tags: 虚拟化
-keywords: 
-description: 
+keywords: libguestfs
+description: libguestfs
 ---
 
 ## 背景 ##

@@ -9,7 +9,7 @@ tags:
   - virtio
 ---
 
-本文转自[肖丁博客](http://ssdxiao.github.io/)
+
 
 在kvm下，virtio-blk的实现特性有virtio-blk，dataplane，vhost-blk。其中前2个已经进入了社区。而vhost-blk仅仅提了patch，并没有通过。
 在开发中需要对比这3种特性下，block的io性能，所以找到了vhost-blk的patch，但是patch直接合入后不能成功使用。所以在解决该问题时候，
@@ -421,3 +421,4 @@ do_pci_register_device中初始化了pci相关config配置。
 
 
 
+本文转自[肖丁博客](http://ssdxiao.github.io/)
