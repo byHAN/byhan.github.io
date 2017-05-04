@@ -42,7 +42,7 @@ description:
 相关文档的[参考代码见这里](https://github.com/Wind-River/titanium-cloud/tree/master/guest-API-SDK/16.10)
 
 
-#### 虚拟机性能和伸缩 ####
+#### 虚拟机性能 ####
 
 ![](http://i.imgur.com/I5kheVh.png)
 
@@ -50,9 +50,10 @@ description:
 #### 伸缩 ####
 
 ![](http://i.imgur.com/WZ7Qb8T.png)
-1. 热插拔vcpu  
-2. 手动或者使用heat自动伸缩虚拟机数目
-3. 
+1. 热插拔vcpu，此特性需要guestOS支持（横向扩展）  
+2. 手动或者使用heat自动伸缩虚拟机数目（纵向扩展）
+
+----------
 
 附电信级需求  
 ![](http://i.imgur.com/wCA5Igs.png)
