@@ -38,7 +38,8 @@ vcpu的运行是在kvm_cpu_exec里面的，这里调用如下命令进入kvm
 
     run_ret = kvm_vcpu_ioctl(cpu, KVM_RUN, 0);
 
-进入KVM后，KVM会切入Guest OS，假如Guest OS运行运行，需要访问IO等，也就是说要访问physical device，那么Qemu与KVM就要进行emulate。  
+进入KVM后，KVM会切入Guest OS，假如Guest OS运行运行，需要访问IO等  
+也就是说要访问physical device，那么Qemu与KVM就要进行emulate。  
 如果是KVM emulate的则由KVM emulate，然后切回Guest OS。  
 如果是Qemu emulate的，则从KVM中进入Qemu，等Qemu中的device model执行完emulate之后，再次在Qemu中调用kvm_vcpu_ioctl(vcpu_fd, KVM_RUN, xxx)进入KVM运行，然后再切回Guest OS
 
@@ -54,7 +55,7 @@ vcpu_enter_guest(kvm/x86.c)
 #### vcpu->requests 处理 ####
 
 上次VM-Exit时可能调用kvm_make_request设置不同的request  
-下次准备VM-Entry时需要处理这些request.
+下次准备VM-Entry时需要处理这些request.  
 ![](http://i.imgur.com/6x4ZA5p.png)  
 ![](http://i.imgur.com/Jf0tSZ8.png)  
 
@@ -72,7 +73,7 @@ vcpu_enter_guest(kvm/x86.c)
 3. 判断当前是否满足vm-entry  
    vcpu的mode不对，有requests请求，需要重新调度，有pending的信号  
    有异常任何情况，不进入vm_entry  
-   开中断，开抢占（在此之前已经关抢占，关中断）
+   开中断，开抢占（在此之前已经关抢占，关中断）  
 ![](http://i.imgur.com/dQcGaJ9.png)
 
 4.kvm_x86_ops->run(vcpu)  
@@ -97,7 +98,8 @@ vcpu_enter_guest(kvm/x86.c)
     vmx->exit_reason = vmcs_read32(VM_EXIT_REASON);
 
 2.加入vm-exit是由于EXIT_REASON_MCE_DURING_VMENTRY或者EXIT_REASON_EXCEPTION_NMI导致的  
-  在vmx_complete_atomic_exit方法中需要进行特殊处理（kvm_machine_check）（kvm_before_handle_nmi和kvm_after_handle_nmi） 
+  在vmx_complete_atomic_exit方法中需要进行特殊处理  
+  （kvm_machine_check）（kvm_before_handle_nmi和kvm_after_handle_nmi） 
 3. 如果有事件模拟的virtual nmi中断，则用vmx_recover_nmi_blocking处理  
 4. 获取与预处理导致的中断由vmx_complete_interrupts-->__vmx_complete_interrupts处理
 
@@ -109,7 +111,7 @@ kvm_x86_ops->handle_exit
 根据不同情况处理异常
 
 至此从kvm中返回到用户态qemu中kvm_cpu_exec方法  
-![](http://i.imgur.com/l7ZC2wr.png)
+![](http://i.imgur.com/l7ZC2wr.png)  
 根据不同退出原因，处理异常  
 然后退出到线程方法qemu_kvm_cpu_thread_fn  
 继续执行下一次循环  
