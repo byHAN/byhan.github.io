@@ -64,12 +64,10 @@ vcpu_enter_guest(kvm/x86.c)
      (vmx.c)
     .prepare_guest_switch = vmx_save_host_state,
 
-1.保存host的fs和gs的断选择子（segment selector）到vmcs  
-
+1. 保存host的fs和gs的断选择子（segment selector）到vmcs  
 2. kvm_set_shared_msr设置host对应的msr寄存器  
    MSR 总体来是为了设置CPU 的工作环境和标示CPU 的工作状态，包括温度控制，性能监控等  
    guest的msr在handle_wrmsr  最终是在vmx_set_msr中更新  
-
 3. 判断当前是否满足vm-entry  
    vcpu的mode不对，有requests请求，需要重新调度，有pending的信号  
    有异常任何情况，不进入vm_entry  
