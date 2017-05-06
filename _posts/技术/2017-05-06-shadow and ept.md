@@ -1,3 +1,4 @@
+---
 layout: post
 title: 内存虚拟化到底是咋整的
 category: 技术
@@ -7,7 +8,18 @@ description:
 ---
 
 
-## 背景 ##
+## 一句话总结 ##
+
+影子页表：  
+guestos创建gva->gpa页表的时候，kvm偷偷建立了一套页表gva->hpa  
+gva到gpa映射的时候，根据影子页表就能查到hpa  
+
+ept:
+引入EPT页表来记录客户机物理地址到宿主机物理地址的映射  
+查询直接将guest的cr3加载到宿主机的mmu中  
+同时EPT页表被载入专门的EPT 页表指针寄存器 EPTP  
+也就是说，两次地址转换都有硬件实现
+
 
 ## 概述 ##
 
