@@ -818,3 +818,8 @@ void vmstate_save_state(QEMUFile *f, const VMStateDescription *vmsd,
 
 [热迁移的算法]:[http://www.linux-kvm.org/page/Migration](http://www.linux-kvm.org/page/Migration)
 （[转自肖丁](http://ssdxiao.github.io/%E8%99%9A%E6%8B%9F%E5%8C%96/2015/09/07/qemu-hot-migration.html)）
+
+## 后续优化 ##
+
+1. [使用postcopy 进行热迁移加速](http://wiki.qemu.org/Features/PostCopyLiveMigration)
+2. [使用autoconverge](http://wiki.qemu.org/Features/AutoconvergeLiveMigration)
