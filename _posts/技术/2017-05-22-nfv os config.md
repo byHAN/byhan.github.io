@@ -58,7 +58,7 @@ NFV场景下，电信级背景中对系统，或者说对虚拟机中的实时�
     isolcpus=20,21,22,23 nohz_full=20-23 rcu_nocbs=20-23 iommu=pt intel_iommu=on default_hugepagesz=1G
     hugepagesz=1G mce=off idle=poll intel_pstate=disable processor.max_cstate=1 pcie_asmp=off tsc=reliable
 
-** 1. isolcpus **
+**1.isolcpus**
 
 用户可以使用 isolcpus 开机参数来从调度器隔离一个或多个 CPU，以此防止调度器在此 CPU 上调度任何用户空间的线程。  
 一旦 CPU 被隔离，用户须手动分配进程至被隔离的 CPU，或使用 CPU 关联系统呼叫或 numactl 命令。  
@@ -69,7 +69,7 @@ NFV场景下，电信级背景中对系统，或者说对虚拟机中的实时�
 
     ps -eo psr,cmd |grep "  3"
 
-** 2. nohz_full **
+**2.nohz_full**
 
 提供一种动态的无时钟设置,在内核"CONFIG_NO_HZ_FULL=y"的前提下，指定哪些CPU核心可以进入完全无滴答状态  
 配置了CONFIG_NO_HZ_FULL=y后，当cpu上只有一个任务在跑的时候，不发送调度时钟中断到此cpu  
@@ -89,7 +89,7 @@ NFV场景下，电信级背景中对系统，或者说对虚拟机中的实时�
 验证方法：  
 [git://git.kernel.org/pub/scm/linux/kernel/git/frederic/dynticks-testing.git](git://git.kernel.org/pub/scm/linux/kernel/git/frederic/dynticks-testing.git)
 
-** 3.rcu_nocbs **
+**3.rcu_nocbs**
 
 当cpu有RCU callbacks pending的时候,nohz_full设置可能不会生效  
 rcu_nocbs来指定cpu 进行卸载RCU callback processing  
@@ -155,11 +155,11 @@ tsc=reliable 表示TSC时钟源是绝对稳定的，关闭启动时和运行时�
 
 ### 其他优化手段 ###
 
-1. 关闭swap  
+**1.关闭swap**  
 
     sudo swapoff -a
 
-2. 关闭ksm  
+**2.关闭ksm**  
 
      echo 0 > /sys/kernel/mm/ksm/merge_across_nodes && echo 0 > /sys/kernel/mm/ksm/run
 
@@ -168,7 +168,7 @@ tsc=reliable 表示TSC时钟源是绝对稳定的，关闭启动时和运行时�
 
     echo 2 > /sys/kernel/mm/ksm/run && sleep 300 && cat /sys/kernel/mm/ksm/pages_shared
 
-3. 关闭看门狗
+**3.关闭看门狗**
 
 linux下每个CPU都有一个看门狗(watchdog)进程  
 该进程每秒获取其CPU的当前时间戳并保存于per-CPU，而timer interrupt()会调用softlock_tick()  
@@ -183,7 +183,7 @@ NMI watchdog(non maskable interrupt)又称硬件watchdog，用于检测OS是否�
     echo 0 > /proc/sys/kernel/watchdog
     echo 0 > /proc/sys/kernel/nmi_watchdog
 
-4. 调整隔离cpu上的ksoftirqd和rcuc的优先级
+**4.调整隔离cpu上的ksoftirqd和rcuc的优先级**
 
 查询出隔离cpu上的ksoftirqd和rcuc(RCU callbacks)进程  
 由于在前文中我们已经设置隔离cpu的rcu_nocbs来卸载RCU callbacks（见前文）  
@@ -219,7 +219,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
 在使用 SCHED_FIFO 时，调度器会按优先级顺序扫描所有的 SCHED_FIFO 线程，并对准备运行的最高优先级线程进行调度。  
 一个 SCHED_FIFO 线程的优先级级别可以是 1 至 99 之间的任何整数，99 是最高优先级。
 
-5. 禁止带宽限制
+**5. 禁止带宽限制**
 
     echo -1 > /proc/sys/kernel/sched_rt_period_us
     echo -1 > /proc/sys/kernel/sched_rt_runtime_us
@@ -230,7 +230,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
 
 这里设为-1禁止生效 
 
-6. 设置中断亲和性  
+**6.设置中断亲和性**  
 
 将绑定到隔离cpu上的中断路由导到cpu0上  
 
@@ -238,7 +238,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
        echo 0 > ${irq}/smp_affinity_list
     done
 
-7.禁用trace  
+**7.禁用trace**  
 
     set -o xtrace
     curpwd=`pwd`
@@ -262,7 +262,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
 本节针对虚拟机配置做相关规划  
 也就是说在创建虚拟机的时候，虚拟机的配置文件追加如下配置  
 
-1. cpu绑定  
+**1.cpu绑定**  
 
 将vcpu绑定都内核隔离出来的物理cpu中  
 在本例中将虚拟机的4个vcpu绑定到物理cpu 20-23中  
@@ -274,7 +274,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
         <vcpupin vcpu="3" cpuset="23"/>
     </cputune>
 
-2. 开启大页  
+**2.开启大页**  
 
 通过以下命令申请16个大页（本例中虚拟机为16G）  
 （dpdk中需要使用大页提高传输效率，这里开启大页后实测实时性可以有1us的提升）  
@@ -288,7 +288,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
       <hugepages/>
     </memoryBacking>
 
-3. 禁用kvmclock  
+**3.禁用kvmclock**  
 
 虚拟机里面的中断不是真正的中断，是qemu或者准确说kvm注入到虚拟机中的  
 因此中断不能即时的被处理，只有进入非根（no-root）模式，也就是vm-entry的时候中断才能够被注入到物理cpu中去  
@@ -326,26 +326,26 @@ cat /sys/devices/system/clocksource/clocksource0/current_clocksource
 
 ### 其他优化手段 ###
 
-1. 关闭swap  
+**1.关闭swap**  
 
     sudo swapoff -a
 
-2. 关闭ksm  
+**2.关闭ksm**  
 
      echo 0 > /sys/kernel/mm/ksm/merge_across_nodes && echo 0 > /sys/kernel/mm/ksm/run
      echo 2 > /sys/kernel/mm/ksm/run && sleep 300 && cat /sys/kernel/mm/ksm/pages_shared
 
-3. 关闭看门狗
+**3.关闭看门狗**
 
     echo 0 > /proc/sys/kernel/watchdog
     echo 0 > /proc/sys/kernel/nmi_watchdog
 
-5. 禁止带宽限制
+**5.禁止带宽限制**
 
     echo -1 > /proc/sys/kernel/sched_rt_period_us
     echo -1 > /proc/sys/kernel/sched_rt_runtime_us
 
-6. 禁止时钟迁移
+**6.禁止时钟迁移**
 
     echo 0 > /proc/sys/kernel/timer_migration
 
