@@ -1,6 +1,11 @@
-
-
-
+---
+layout: post
+title: 内核启动参数
+category: 技术
+tags: 虚拟化层
+keywords: 
+description: RT-Preempt,linux realtime,rtmutexes
+---
 
 
 概述

@@ -48,12 +48,12 @@ NFV场景下，电信级背景中对系统，或者说对虚拟机中的实时�
 （注意，会有一系列依赖包要装）
 
 本文通过[srpm](http://vault.centos.org/7.3.1611/rt/)本地编译，安装  
-更多rt相关内容参看本人这篇博文  
+更多rt相关内容参看[本人这篇博文](http://www.hanbaoying.com/2017/05/08/rt-patch.html)  
 
 ### 优化kernel启动参数 ###
 
 在内核引导配置/boot/grub2/grub.cfg中，对应内核后追加如下参数  
-更全面的内核参数，参看本人这篇博文
+更全面的内核参数，参看[本人这篇转载](http://www.hanbaoying.com/2017/05/24/kernel-boot-parameter.html)
 
     isolcpus=20,21,22,23 nohz_full=20-23 rcu_nocbs=20-23 iommu=pt intel_iommu=on default_hugepagesz=1G
     hugepagesz=1G mce=off idle=poll intel_pstate=disable processor.max_cstate=1 pcie_asmp=off tsc=reliable
@@ -292,7 +292,7 @@ SCHED_FIFO （也叫做静态优先级调度）是一项实时策略，定义了
 
 虚拟机里面的中断不是真正的中断，是qemu或者准确说kvm注入到虚拟机中的  
 因此中断不能即时的被处理，只有进入非根（no-root）模式，也就是vm-entry的时候中断才能够被注入到物理cpu中去  
-具体参考本人这篇博文《中断虚拟化（pic）到底是咋整的》  
+具体参考本人这篇博文[《中断虚拟化（pic）到底是咋整的》](http://www.hanbaoying.com/2017/05/20/pic-8259.html)  
 这就导致通过时钟中断计数，再换算为时间这种方式是有偏移的，是不准确的  
 
 除此之外，虚拟机主动vm-exit去读取当前的时间，这种方式会导致虚拟机频繁的退出，影响性能。  
