@@ -2,10 +2,9 @@
 layout: post
 title:  virtio的工作流程——kernel中virtio-pci初始化(2)
 date:   2017-03-28 14:10:00
-categories: linux
+categories: 技术
 tags: 
-  - linux
-  - virtio
+  - 虚拟化
 ---
 
 
