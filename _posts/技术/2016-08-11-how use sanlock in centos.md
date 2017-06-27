@@ -13,7 +13,7 @@ description:
 
 **重要**  
 需要关闭selinux  
-否则sanlock会没有权限读取lockspace,会导致Lunix系统重启  
+否则sanlock会没有权限读取lockspace,会导致Linux系统重启  
 创建虚拟机报错如下：  
 ![](http://i.imgur.com/epAqhvV.png)  
 
@@ -22,7 +22,8 @@ description:
 
 通过阅读sanlock的代码发现是open方法调用lockspace的时候没有权限导致的  
 
-
+当然也可以设置selinux规则，给libvirt-sanlock相应的目录权限  
+这里为了方便关闭selinux  
 关闭selinux的方法如下：  
 
     vi /etc/sysconfig/selinux
@@ -41,4 +42,4 @@ description:
 **重要**  
 
 注意修改libvirt的相关配置，否则会热迁移报错  
-https://www.mirantis.com/blog/tutorial-openstack-live-migration-with-kvm-hypervisor-and-nfs-shared-storage/
+参考[这个链接](https://www.mirantis.com/blog/tutorial-openstack-live-migration-with-kvm-hypervisor-and-nfs-shared-storage/)

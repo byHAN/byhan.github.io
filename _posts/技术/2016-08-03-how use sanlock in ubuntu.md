@@ -147,7 +147,7 @@ no_subtree_check：不检查父目录的权限。
 
 #### 功能验证 ####
 
-请参考测试用例
+请参考[本人这篇博文](http://www.hanbaoying.com/2016/08/19/test-case-for-sanlock.html)
 
 ## 参考文档 ##
 
