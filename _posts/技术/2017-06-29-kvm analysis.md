@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [转载]kvm分析工具
+title: kvm分析工具
 category: 技术
 tags: 虚拟化
 keywords: 
