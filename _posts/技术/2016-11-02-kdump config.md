@@ -24,8 +24,16 @@ vim /etc/default/kdump-tools
 修改配置项  
 kernel.sysrq = 1
 
+
 #### 验证kdump####
 
 1. echo c> /proc/sysrq-trigger  
 2. 可以配上串口，从bmc查看触发的kdump  
-![](http://i.imgur.com/vHVqiwL.png)
+![](http://i.imgur.com/vHVqiwL.png)  
+
+重启主机后  
+本地也可以这样查看确认  
+![](http://i.imgur.com/IjiGD6j.png)
+
+生成的转储文件如下这个样子：  
+![](http://i.imgur.com/M9ZlloK.png)
