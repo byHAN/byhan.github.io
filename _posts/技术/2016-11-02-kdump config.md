@@ -37,3 +37,34 @@ kernel.sysrq = 1
 
 生成的转储文件如下这个样子：  
 ![](http://i.imgur.com/M9ZlloK.png)
+
+
+### 定位 ###
+
+这里用crash定位 
+
+
+首先需要安装从源安装systemtap  
+
+    sudo apt-get install systemtap
+
+查看内核版本
+
+    uname -a
+    
+![](http://i.imgur.com/TiWUXrk.png)
+
+到这里下载对应版本的debug-info（如果没有对应的版本，需要从网上找到对应的发行版本）  
+
+    http://ddebs.ubuntu.com/pool/main/l/linux/
+    
+安装deb包
+
+    dpkg -i linux-image-3.19.0-25-generic-dbgsym_3.19.0-25.26~14.04.1_amd64.ddeb
+
+
+使用crash调试
+
+    crash /usr/lib/debug/boot/vmlinux-3.19.0-25-generic /var/crash/201708160959/dump.201708160959
+ 
+

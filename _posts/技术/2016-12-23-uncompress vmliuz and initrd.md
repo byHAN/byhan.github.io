@@ -25,7 +25,7 @@ description:
     # cp initrd.img /tmp/initrd.img.gz
     # cd /tmp/ && gzip -d initrd.img.gz
     # mount -o loop initrd.img /mnt----2.4内核
-    # mkdir initrd && cd initrd && cpio -ivmd <../initrd.img ---2.6内核
+    # mkdir initrd && cd initrd && cpio -ivmd <../initrd.img
 
 
 转载自[http://www.veryopen.org/?p=1477](http://www.veryopen.org/?p=1477)
