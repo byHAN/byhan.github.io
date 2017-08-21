@@ -22,6 +22,17 @@ description: vmtouch
 直接把nova安装到物理机上，用例无问题  
 把nova安装到虚拟机中，用例就会失败  
 
+最终确认是指令集不满足，虚拟机中虚拟机直接没有运行起来
+（从libvirt到qemu到kernel一路gdb下来才发现，后来想想根本还是环境不好连，偷懒了）
+
+最终确认是cpu-model的问题  
+
+修改方法：
+1. 开启nested特性，虚拟机使用kvm
+2. cpu不指定为host-model模式  
+
+
+
 
 
 
