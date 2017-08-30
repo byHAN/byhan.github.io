@@ -27,7 +27,7 @@ buff/cache部分会急剧增加，导致free和available的内存不停减少
 继而吃swap分区，吃完swap则host os就重启了  
 
 打开虚拟机的xml，发现直通磁盘的cache没有限制，也就是default  
-（具体none，writeback,writethrough,default代表含义不详描述）
+（具体none，writeback,writethrough,default代表含义[见这里](http://www.hanbaoying.com/2017/06/28/iocache.html)）
 
 与现场同学交流，他们在跑的测试是io密集型脚本  
 
