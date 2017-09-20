@@ -29,6 +29,7 @@ description:
 3. 修改mac地址的内容fa:16:3f:68:e3:32（mac地址有格式，一般选后半部分一位修改即可）
 4. 给虚拟机起个名字，修改<name>部分,这里虚拟机名字为centos
 
+```
     <domain type='kvm'>
     <memory unit='GiB'>4</memory>
     <vcpu>2</vcpu>
@@ -72,7 +73,8 @@ description:
     <name>centos</name>
     
     </domain>
-    
+```
+
 3.创建虚拟机
 -------
 
@@ -134,10 +136,12 @@ description:
 修改磁盘路径为上面的创建的盘  
 修改磁盘名(根据需要修改，不能和已有的重名，这里修改为vdb)
 
+```
     <disk type='file' device='disk'>
-    <driver name='qemu' type='raw'/>
-    <source file='/home/raw/data.img'/>
+      <driver name='qemu' type='raw'/>
+      <source file='/home/raw/data.img'/>
     <target dev='vdb' bus='virtio'/>
+```
 
 3.添加磁盘
 
