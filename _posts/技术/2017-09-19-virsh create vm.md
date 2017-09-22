@@ -1,7 +1,7 @@
 ---
 layout: post
-title: virsh创建虚拟机简介
-category: 技术
+title: 3
+category: leecode
 tags: 
 keywords: 
 description: 
