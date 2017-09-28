@@ -141,6 +141,7 @@ description:
       <driver name='qemu' type='raw'/>
       <source file='/home/raw/data.img'/>
     <target dev='vdb' bus='virtio'/>
+    </disk>
 ```
 
 3.添加磁盘
