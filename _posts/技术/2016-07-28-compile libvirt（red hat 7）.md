@@ -1,6 +1,6 @@
 ---
 layout: post
-title: compile libvirt（red hat 7）
+title: compile libvirt（centos）
 category: 技术
 tags: 虚拟化层
 keywords: 
