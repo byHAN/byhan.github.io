@@ -49,9 +49,9 @@ description:
     debian/rules debian/rules binary-headers binary-generic binary-perarch skipdbg=false
 
 
-如果想改包名的话，修改/debian/changelog即可
-如果要修改内核版本号的话，需要修改/debian.utopic/changelog
-用dch -i修改即可
+如果想改包名的话，修改/debian/changelog即可  
+如果要修改内核版本号的话，需要修改/debian.utopic/changelog  
+（用dch -i修改即可）
 
 
 
