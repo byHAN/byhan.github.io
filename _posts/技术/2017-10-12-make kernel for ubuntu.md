@@ -46,7 +46,7 @@ description:
 ### 编译 ###
 
     debian/rules clean
-    debian/rules binary-headers binary-generic
+    debian/rules debian/rules binary-headers binary-generic binary-perarch skipdbg=false
 
 
 如果想改包名的话，修改/debian/changelog即可
