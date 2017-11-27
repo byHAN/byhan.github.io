@@ -75,7 +75,7 @@ usable
 
 ----------
 
-qemu中hpm接口获取信息情况如下：  
+qemu中hmp接口获取信息情况如下：  
 
 ![](https://i.imgur.com/IEF6WXv.png)
 
