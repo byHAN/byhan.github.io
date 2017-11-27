@@ -75,11 +75,16 @@ usable
 
 ----------
 
+qemu中hpm接口获取信息情况如下：  
+
 ![](https://i.imgur.com/IEF6WXv.png)
 
+----------
 
 通过[这篇博文](www.hanbaoying.com/2017/03/20/Virtio-Balloon.html)我们知道  
 数据是从virtio-balloon的前端获取的，guest的kernel中
+
+![](https://i.imgur.com/qQiAijP.png)
 
 	unsigned long events[NR_VM_EVENT_ITEMS];
 	struct sysinfo i;
@@ -116,7 +121,7 @@ usable
 	#define VIRTIO_BALLOON_S_AVAIL    6   /* Available memory as in /proc */
 	#define VIRTIO_BALLOON_S_NR       7
 
-![](https://i.imgur.com/qQiAijP.png)
+
 
 ----------
 
@@ -151,4 +156,4 @@ MemFree并不适用，因为MemFree不能代表全部可用的内存，系统中
 
 参考文献：
 
-http://linuxperf.com/?p=142
+[http://linuxperf.com/?p=142](http://linuxperf.com/?p=142)
