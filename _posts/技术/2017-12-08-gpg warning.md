@@ -1,8 +1,8 @@
 ---
 layout: post
-title: gpg: WARNING
-category: nova
-tags: nova-default
+title: gpg WARNING
+category: 技术
+tags: 
 keywords: 
 description: 
 ---
