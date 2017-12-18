@@ -152,7 +152,32 @@ MemFree并不适用，因为MemFree不能代表全部可用的内存，系统中
 比如cache/buffer、slab都有一部分可以回收，所以这部分可回收的内存加上MemFree才是系统可用的内存，即MemAvailable。  
 /proc/meminfo中的MemAvailable是内核使用特定的算法估算出来的，要注意这是一个估计值，并不精确。
 
+----------
 
+### 1.背景 ###
+
+基于虚拟机的气球设备（virio-balloon）采集Memory.usage指标  
+前提条件，需要guestOS中安装virio_balloon驱动。  
+（详细参考分析[看这里](http://www.hanbaoying.com/2017/03/20/Virtio-Balloon.html)）
+
+采集周期通过nova中的CONF.libivrt.mem_stats_period_seconds设置，默认是10s  
+
+### 2.Linux ###
+
+从源码看，该驱动在kernel 2.6.37以后已经正式进入内核主干版本  
+理论上内核大于上述版本都可以采集此指标  
+
+目前只验证了ubuntu14,centos7  
+
+注：cirros镜像由于其特殊性，无法采集到指标  
+
+### 3.Windows ###
+
+在安装了virtio-balloon的基础上，需要开启blnsvr服务，这个服务由virtio_balloon提供。
+
+开启方式如下：  
+进入到virio-balloon驱动目录下，也就是BLNSVR.EXE所在目录下  
+执行BLNSVR  -I  
 
 参考文献：
 
