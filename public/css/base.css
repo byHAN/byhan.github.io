@@ -68,8 +68,8 @@ body, html {
   /*background-color: #fafaf6;*/
   /*background-image: url(/public/img/body_bg.jpg);*/
 
-  background-color: #303030;
-  height: 80%;
+  background-color: #fafaf6;
+  height: 100%;
   border-right: 2px solid #303030;
   overflow-y: auto;
   font-color: #fff;
